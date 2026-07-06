@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Support Center · AgroMarket Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark"><i class="fa-solid fa-seedling"></i></div>
+      <div class="brand-text">
+        <div class="name">AgroMarket</div>
+        <div class="sub">Farmer Portal</div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a class="nav-item" href="index.html"><i class="fa-solid fa-table-cells-large"></i>Dashboard</a>
+      <a class="nav-item" href="add-listing.html"><i class="fa-solid fa-boxes-stacked"></i>Product Management</a>
+      <a class="nav-item" href="orders.html"><i class="fa-solid fa-receipt"></i>Orders</a>
+      <a class="nav-item" href="chat.html"><i class="fa-solid fa-comments"></i>Customer Chat</a>
+      <a class="nav-item active" href="support.html"><i class="fa-solid fa-circle-question"></i>Support</a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <p>Need help listing your harvest or reaching more buyers?</p>
+      <a href="#">Visit Help Center <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-crumb">AgroMarket Portal <i class="fa-solid fa-angle-right"></i> <strong>Support Center</strong></div>
+      <div class="topbar-actions">
+        <button class="icon-btn" aria-label="Notifications"><i class="fa-solid fa-bell"></i><span class="dot"></span></button>
+        <div class="avatar">RA</div>
+      </div>
+    </header>
+
+    <main class="content">
+
+      <div class="support-hero" style="background-image:linear-gradient(180deg, rgba(20,40,28,0.15), rgba(20,40,28,0.55)), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1200&h=400&fit=crop')">
+        <span class="eyebrow">Support Center</span>
+        <h1>Find answers, or reach our team directly</h1>
+        <p>Search guides on listings, shipping, and payments — or open a ticket with our specialists.</p>
+        <div class="support-search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Can't find what you need? Search articles…">
+          <button class="btn btn-primary">Search</button>
+        </div>
+      </div>
+
+      <div class="topic-grid">
+        <div class="topic-card">
+          <div class="topic-icon green"><i class="fa-solid fa-tags"></i></div>
+          <h3>Listing Guide</h3>
+          <p>Learn how to photograph and price your produce for the marketplace.</p>
+          <ul>
+            <li>Listing requirements</li>
+            <li>Category selection</li>
+            <li>Pricing strategies</li>
+          </ul>
+        </div>
+        <div class="topic-card">
+          <div class="topic-icon blue"><i class="fa-solid fa-truck"></i></div>
+          <h3>Shipping</h3>
+          <p>Understand delivery standards, cold packaging, and pickup windows.</p>
+          <ul>
+            <li>Delivery timelines</li>
+            <li>Packaging standards</li>
+            <li>Pickup scheduling</li>
+          </ul>
+        </div>
+        <div class="topic-card">
+          <div class="topic-icon amber"><i class="fa-solid fa-credit-card"></i></div>
+          <h3>Payments</h3>
+          <p>See how payouts, escrow, and transaction fees work on AgroMarket.</p>
+          <ul>
+            <li>Payout schedule</li>
+            <li>Fee breakdown</li>
+            <li>Dispute resolution</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ticket-row">
+        <div class="ticket-card">
+          <div class="section-head">
+            <h2>Recent Tickets</h2>
+            <a href="#" class="link">View all <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+          <div class="ticket-list">
+            <div class="ticket-item">
+              <div class="ticket-icon"><i class="fa-solid fa-box"></i></div>
+              <div class="ticket-body">
+                <strong>Damaged item reported by buyer</strong>
+                <span class="text-muted">Ticket #1042 · Opened Oct 24</span>
+              </div>
+              <span class="pill pending">Open</span>
+            </div>
+            <div class="ticket-item">
+              <div class="ticket-icon"><i class="fa-solid fa-credit-card"></i></div>
+              <div class="ticket-body">
+                <strong>Payout delayed for order #4270</strong>
+                <span class="text-muted">Ticket #1039 · Opened Oct 22</span>
+              </div>
+              <span class="pill processing">In Progress</span>
+            </div>
+            <div class="ticket-item">
+              <div class="ticket-icon"><i class="fa-solid fa-circle-check"></i></div>
+              <div class="ticket-body">
+                <strong>Question about listing categories</strong>
+                <span class="text-muted">Ticket #1031 · Opened Oct 18</span>
+              </div>
+              <span class="pill shipped">Resolved</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <h4>Still can't find it?</h4>
+          <p>Our farmer support specialists are available every day to help with listings, orders, and payments.</p>
+          <a href="tel:+18002476435" class="btn btn-outline contact-line"><i class="fa-solid fa-phone"></i>+1 (800) AGRO-HELP</a>
+          <button class="btn btn-primary contact-line" id="open-ticket-btn"><i class="fa-solid fa-headset"></i>Open a Ticket</button>
+          <span class="support-tag"><i class="fa-solid fa-clock"></i> 24/7 support</span>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<div class="toast" id="toast">
+  <i class="fa-solid fa-circle-check"></i>
+  <span id="toast-text">Saved</span>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

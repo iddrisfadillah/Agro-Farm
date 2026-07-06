@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard · AgroMarket Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark"><i class="fa-solid fa-seedling"></i></div>
+      <div class="brand-text">
+        <div class="name">AgroMarket</div>
+        <div class="sub">Farmer Portal</div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a class="nav-item active" href="index.html"><i class="fa-solid fa-table-cells-large"></i>Dashboard</a>
+      <a class="nav-item" href="add-listing.html"><i class="fa-solid fa-boxes-stacked"></i>Product Management</a>
+      <a class="nav-item" href="orders.html"><i class="fa-solid fa-receipt"></i>Orders</a>
+      <a class="nav-item" href="chat.html"><i class="fa-solid fa-comments"></i>Customer Chat</a>
+      <a class="nav-item" href="support.html"><i class="fa-solid fa-circle-question"></i>Support</a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <p>Need help listing your harvest or reaching more buyers?</p>
+      <a href="#">Visit Help Center <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-crumb">AgroMarket Portal <i class="fa-solid fa-angle-right"></i> <strong>Dashboard</strong></div>
+      <div class="topbar-actions">
+        <button class="icon-btn" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <button class="icon-btn" aria-label="Notifications"><i class="fa-solid fa-bell"></i><span class="dot"></span></button>
+        <div class="avatar">RA</div>
+      </div>
+    </header>
+
+    <main class="content">
+      <div class="page-head">
+        <h1>Welcome back, Radical</h1>
+        <p>Your farm status is currently <span class="status">Thriving</span> — here's a summary of today's activity.</p>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-top">
+            <div class="stat-icon green"><i class="fa-solid fa-sack-dollar"></i></div>
+            <span class="stat-trend">+12%</span>
+          </div>
+          <div class="stat-value">$1,240.00</div>
+          <div class="stat-label">Total revenue this month</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-top">
+            <div class="stat-icon blue"><i class="fa-solid fa-boxes-stacked"></i></div>
+            <span class="stat-trend">+2</span>
+          </div>
+          <div class="stat-value">12</div>
+          <div class="stat-label">Active listings</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-top">
+            <div class="stat-icon amber"><i class="fa-solid fa-clock"></i></div>
+            <span class="stat-trend">Due soon</span>
+          </div>
+          <div class="stat-value">5</div>
+          <div class="stat-label">Orders awaiting fulfillment</div>
+        </div>
+
+        <div class="insights-card">
+          <h4>Quick Insights</h4>
+          <div class="weather-row">
+            <i class="fa-solid fa-sun"></i>
+            <span class="temp">24°C</span>
+          </div>
+          <span class="tag">High demand for leafy greens</span>
+        </div>
+      </div>
+
+      <section class="listings-section">
+        <div class="section-head">
+          <h2>Active Listings</h2>
+          <a href="add-listing.html" class="btn btn-primary"><i class="fa-solid fa-plus"></i>Add New Product</a>
+        </div>
+        <div class="listing-grid">
+
+          <div class="listing-card">
+            <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1592841200221-a6898f307baa?w=400&h=300&fit=crop')">
+              <span class="badge">In Stock</span>
+            </div>
+            <div class="body">
+              <h3>Organic Cherry Tomatoes</h3>
+              <div class="meta"><strong>$3.20</strong> / lb · 40 lb available</div>
+              <div class="actions">
+                <button class="btn btn-outline">View</button>
+                <button class="btn btn-outline">Edit</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="listing-card">
+            <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=400&h=300&fit=crop')">
+              <span class="badge">In Stock</span>
+            </div>
+            <div class="body">
+              <h3>Fresh Spinach Bunch</h3>
+              <div class="meta"><strong>$1.80</strong> / bunch · 65 bunches available</div>
+              <div class="actions">
+                <button class="btn btn-outline">View</button>
+                <button class="btn btn-outline">Edit</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="listing-card">
+            <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1551754655-cd27e38d2076?w=400&h=300&fit=crop')">
+              <span class="badge">Low Stock</span>
+            </div>
+            <div class="body">
+              <h3>Sweet Corn (5kg pack)</h3>
+              <div class="meta"><strong>$4.50</strong> / pack · 8 packs available</div>
+              <div class="actions">
+                <button class="btn btn-outline">View</button>
+                <button class="btn btn-outline">Edit</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="orders-section">
+        <div class="section-head">
+          <h2>Recent Orders</h2>
+          <a href="#" class="link">View all <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="card-table">
+          <table>
+            <thead>
+              <tr><th>Customer</th><th>Product</th><th>Status</th><th>Time</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="cust"><span class="initial">ER</span>Emily R.</div></td>
+                <td>Organic Cherry Tomatoes</td>
+                <td><span class="pill processing">Processing</span></td>
+                <td class="text-muted">10 mins ago</td>
+              </tr>
+              <tr>
+                <td><div class="cust"><span class="initial">BC</span>Ben Carter</div></td>
+                <td>Fresh Spinach Bunch</td>
+                <td><span class="pill pending">Pending</span></td>
+                <td class="text-muted">42 mins ago</td>
+              </tr>
+              <tr>
+                <td><div class="cust"><span class="initial">MC</span>Mike Chen</div></td>
+                <td>Sweet Corn (5kg)</td>
+                <td><span class="pill shipped">Shipped</span></td>
+                <td class="text-muted">Yesterday</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

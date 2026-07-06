@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orders Management · AgroMarket Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark"><i class="fa-solid fa-seedling"></i></div>
+      <div class="brand-text">
+        <div class="name">AgroMarket</div>
+        <div class="sub">Farmer Portal</div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a class="nav-item" href="index.html"><i class="fa-solid fa-table-cells-large"></i>Dashboard</a>
+      <a class="nav-item" href="add-listing.html"><i class="fa-solid fa-boxes-stacked"></i>Product Management</a>
+      <a class="nav-item active" href="orders.html"><i class="fa-solid fa-receipt"></i>Orders</a>
+      <a class="nav-item" href="chat.html"><i class="fa-solid fa-comments"></i>Customer Chat</a>
+      <a class="nav-item" href="support.html"><i class="fa-solid fa-circle-question"></i>Support</a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <p>Need help listing your harvest or reaching more buyers?</p>
+      <a href="#">Visit Help Center <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-crumb">AgroMarket Portal <i class="fa-solid fa-angle-right"></i> <strong>Orders Management</strong></div>
+      <div class="topbar-actions">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Search orders, buyers…">
+        </div>
+        <button class="icon-btn" aria-label="Refresh"><i class="fa-solid fa-rotate-right"></i></button>
+        <button class="icon-btn" aria-label="Export"><i class="fa-solid fa-file-export"></i></button>
+        <div class="avatar">RA</div>
+      </div>
+    </header>
+
+    <main class="content">
+      <div class="page-head">
+        <h1>Orders Management</h1>
+        <p>Track every order from checkout to delivery, all in one place.</p>
+      </div>
+
+      <div class="stats-row cols-4">
+        <div class="stat-card">
+          <div class="stat-top">
+            <div class="stat-icon green"><i class="fa-solid fa-receipt"></i></div>
+          </div>
+          <div class="stat-value">42</div>
+          <div class="stat-label">Total orders</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-top">
+            <div class="stat-icon amber"><i class="fa-solid fa-truck"></i></div>
+          </div>
+          <div class="stat-value">12</div>
+          <div class="stat-label">Ready for pickup</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-top">
+            <div class="stat-icon blue"><i class="fa-solid fa-sack-dollar"></i></div>
+          </div>
+          <div class="stat-value">GH₵ 8,420</div>
+          <div class="stat-label">Revenue this month</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-top">
+            <div class="stat-icon green"><i class="fa-solid fa-star"></i></div>
+          </div>
+          <div class="stat-value">4.9 / 5</div>
+          <div class="stat-label">Customer satisfaction</div>
+        </div>
+      </div>
+
+      <section class="orders-section">
+        <div class="section-head">
+          <h2>Recent Orders</h2>
+          <div class="section-actions">
+            <button class="btn btn-outline"><i class="fa-solid fa-filter"></i>Filter</button>
+            <button class="btn btn-outline"><i class="fa-solid fa-file-arrow-down"></i>Export CSV</button>
+          </div>
+        </div>
+
+        <div class="card-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>Buyer Name</th>
+                <th>Product(s)</th>
+                <th>Total Amount</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="mono">#4283</td>
+                <td class="text-muted">Oct 25, 2023</td>
+                <td>Aisha Bello</td>
+                <td>Organic Tomatoes (10kg)</td>
+                <td>GH₵ 420.00</td>
+                <td><span class="pill pending">Pending</span></td>
+                <td class="row-actions">
+                  <button class="icon-btn-sm" aria-label="View"><i class="fa-solid fa-eye"></i></button>
+                  <button class="icon-btn-sm" aria-label="Update status"><i class="fa-solid fa-pen"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td class="mono">#4282</td>
+                <td class="text-muted">Oct 25, 2023</td>
+                <td>Kwesi Owusu</td>
+                <td>Local Farm Eggs (30ct)</td>
+                <td>GH₵ 380.00</td>
+                <td><span class="pill processing">Processing</span></td>
+                <td class="row-actions">
+                  <button class="icon-btn-sm" aria-label="View"><i class="fa-solid fa-eye"></i></button>
+                  <button class="icon-btn-sm" aria-label="Update status"><i class="fa-solid fa-pen"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td class="mono">#4281</td>
+                <td class="text-muted">Oct 24, 2023</td>
+                <td>Grace Mensah</td>
+                <td>Maize (50kg Sack)</td>
+                <td>GH₵ 1,240.00</td>
+                <td><span class="pill shipped">Shipped</span></td>
+                <td class="row-actions">
+                  <button class="icon-btn-sm" aria-label="View"><i class="fa-solid fa-eye"></i></button>
+                  <button class="icon-btn-sm" aria-label="Update status"><i class="fa-solid fa-pen"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td class="mono">#4280</td>
+                <td class="text-muted">Oct 23, 2023</td>
+                <td>Daniel Owusu</td>
+                <td>Pontian Onions (25kg)</td>
+                <td>GH₵ 610.00</td>
+                <td><span class="pill delivered">Delivered</span></td>
+                <td class="row-actions">
+                  <button class="icon-btn-sm" aria-label="View"><i class="fa-solid fa-eye"></i></button>
+                  <button class="icon-btn-sm" aria-label="Update status"><i class="fa-solid fa-pen"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="table-footer">
+            <span class="text-muted">Showing 4 of 42 orders</span>
+            <div class="pagination">
+              <button class="page-btn" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+              <button class="page-btn active">1</button>
+              <button class="page-btn">2</button>
+              <button class="page-btn">3</button>
+              <button class="page-btn" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="highlight-row">
+        <div class="highlight-card green">
+          <div class="highlight-icon"><i class="fa-solid fa-truck-fast"></i></div>
+          <div>
+            <h4>Efficient Logistics</h4>
+            <p>Optimized routes deliver your harvest to buyers faster, cutting spoilage and getting fresher produce to market sooner.</p>
+            <a href="#" class="link">Manage Fleet <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="highlight-card red">
+          <div class="highlight-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <div>
+            <h4>Payment Security</h4>
+            <p>Every transaction is authenticated and protected by escrow so payouts are only released after a confirmed delivery.</p>
+            <a href="#" class="link">Payout History <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

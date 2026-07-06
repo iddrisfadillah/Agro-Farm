@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Customer Chat · AgroMarket Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark"><i class="fa-solid fa-seedling"></i></div>
+      <div class="brand-text">
+        <div class="name">AgroMarket</div>
+        <div class="sub">Farmer Portal</div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a class="nav-item" href="index.html"><i class="fa-solid fa-table-cells-large"></i>Dashboard</a>
+      <a class="nav-item" href="add-listing.html"><i class="fa-solid fa-boxes-stacked"></i>Product Management</a>
+      <a class="nav-item" href="orders.html"><i class="fa-solid fa-receipt"></i>Orders</a>
+      <a class="nav-item active" href="chat.html"><i class="fa-solid fa-comments"></i>Customer Chat</a>
+      <a class="nav-item" href="support.html"><i class="fa-solid fa-circle-question"></i>Support</a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <p>Need help listing your harvest or reaching more buyers?</p>
+      <a href="#">Visit Help Center <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="main main-flush">
+    <header class="topbar">
+      <div class="topbar-crumb">AgroMarket Portal <i class="fa-solid fa-angle-right"></i> <strong>Customer Chat</strong> <span class="badge-live">3 Active</span></div>
+      <div class="topbar-actions">
+        <button class="icon-btn" aria-label="Notifications"><i class="fa-solid fa-bell"></i><span class="dot"></span></button>
+        <button class="icon-btn" aria-label="Settings"><i class="fa-solid fa-gear"></i></button>
+        <div class="avatar">RA</div>
+      </div>
+    </header>
+
+    <div class="chat-shell">
+
+      <!-- Conversation list -->
+      <aside class="chat-list">
+        <div class="chat-search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Search conversations…">
+        </div>
+
+        <a class="chat-list-item active" href="#">
+          <div class="chat-avatar" style="background-image:url('https://i.pravatar.cc/80?img=47')"></div>
+          <div class="chat-list-item-body">
+            <div class="row"><strong>Ama Serwaa</strong><span class="time">10:42 AM</span></div>
+            <p>Is the organic tomato batch still available for pickup?</p>
+          </div>
+        </a>
+
+        <a class="chat-list-item" href="#">
+          <div class="chat-avatar" style="background-image:url('https://i.pravatar.cc/80?img=12')"></div>
+          <div class="chat-list-item-body">
+            <div class="row"><strong>Kofi Asante</strong><span class="time">9:15 AM</span></div>
+            <p>Thanks for the quick delivery yesterday!</p>
+          </div>
+        </a>
+
+        <a class="chat-list-item unread" href="#">
+          <div class="chat-avatar" style="background-image:url('https://i.pravatar.cc/80?img=32')"></div>
+          <div class="chat-list-item-body">
+            <div class="row"><strong>Efua Owusu</strong><span class="time">Yesterday</span></div>
+            <p>Can I get a discount on bulk spinach orders?</p>
+          </div>
+          <span class="unread-dot"></span>
+        </a>
+
+        <a class="chat-list-item" href="#">
+          <div class="chat-avatar" style="background-image:url('https://i.pravatar.cc/80?img=68')"></div>
+          <div class="chat-list-item-body">
+            <div class="row"><strong>Nana Yaw</strong><span class="time">Mon</span></div>
+            <p>Perfect, see you at the market on Saturday.</p>
+          </div>
+        </a>
+      </aside>
+
+      <!-- Active conversation -->
+      <section class="chat-main">
+        <div class="chat-header">
+          <div class="chat-header-user">
+            <div class="chat-avatar lg" style="background-image:url('https://i.pravatar.cc/80?img=47')"></div>
+            <div>
+              <h3>Ama Serwaa</h3>
+              <span class="status-online"><i class="fa-solid fa-circle"></i> Online</span>
+            </div>
+          </div>
+          <div class="chat-header-actions">
+            <button class="btn btn-outline"><i class="fa-solid fa-user"></i>Buyer Details</button>
+            <button class="btn btn-primary"><i class="fa-solid fa-file-invoice"></i>Send Invoice</button>
+          </div>
+        </div>
+
+        <div class="chat-history">
+          <div class="day-divider"><span>Today</span></div>
+
+          <div class="msg-row">
+            <div class="chat-avatar sm" style="background-image:url('https://i.pravatar.cc/80?img=47')"></div>
+            <div class="msg-bubble incoming">
+              Hi! Is the organic cherry tomato batch from this week still available for pickup at the Osu market stall?
+              <span class="msg-time">10:38 AM</span>
+            </div>
+          </div>
+
+          <div class="msg-row outgoing">
+            <div class="msg-bubble outgoing">
+              Yes it is — we still have about 15kg left. I can hold 5kg for you until Saturday morning if that works.
+              <span class="msg-time">10:40 AM</span>
+            </div>
+            <div class="chat-avatar sm" style="background-image:url('https://i.pravatar.cc/80?img=5')"></div>
+          </div>
+
+          <div class="day-divider"><span>Just now</span></div>
+
+          <div class="msg-row">
+            <div class="chat-avatar sm" style="background-image:url('https://i.pravatar.cc/80?img=47')"></div>
+            <div class="msg-bubble incoming">
+              That works great, thank you! Here's a photo from last time — is the freshness the same this batch?
+              <div class="msg-image" style="background-image:url('https://images.unsplash.com/photo-1592841200221-a6898f307baa?w=400&h=300&fit=crop')"></div>
+              <span class="msg-time">10:42 AM</span>
+            </div>
+          </div>
+        </div>
+
+        <form class="chat-input-bar" id="chat-form">
+          <button type="button" class="icon-btn-sm" aria-label="Attach file"><i class="fa-solid fa-paperclip"></i></button>
+          <button type="button" class="icon-btn-sm" aria-label="Attach image"><i class="fa-solid fa-image"></i></button>
+          <input type="text" id="chat-input" placeholder="Type your message to Ama…" autocomplete="off">
+          <button type="submit" class="send-btn" aria-label="Send"><i class="fa-solid fa-paper-plane"></i></button>
+        </form>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

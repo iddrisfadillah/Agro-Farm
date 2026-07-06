@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add New Listing · AgroMarket Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark"><i class="fa-solid fa-seedling"></i></div>
+      <div class="brand-text">
+        <div class="name">AgroMarket</div>
+        <div class="sub">Farmer Portal</div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a class="nav-item" href="index.html"><i class="fa-solid fa-table-cells-large"></i>Dashboard</a>
+      <a class="nav-item active" href="add-listing.html"><i class="fa-solid fa-boxes-stacked"></i>Product Management</a>
+      <a class="nav-item" href="orders.html"><i class="fa-solid fa-receipt"></i>Orders</a>
+      <a class="nav-item" href="chat.html"><i class="fa-solid fa-comments"></i>Customer Chat</a>
+      <a class="nav-item" href="support.html"><i class="fa-solid fa-circle-question"></i>Support</a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <p>Need help listing your harvest or reaching more buyers?</p>
+      <a href="#">Visit Help Center <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-crumb">Product Management <i class="fa-solid fa-angle-right"></i> <strong>Add New Listing</strong></div>
+      <div class="topbar-actions">
+        <button class="icon-btn" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <button class="icon-btn" aria-label="Notifications"><i class="fa-solid fa-bell"></i><span class="dot"></span></button>
+        <div class="avatar">RA</div>
+      </div>
+    </header>
+
+    <main class="content">
+      <div class="form-head">
+        <h1>Create Market-Ready Listing</h1>
+        <p>Fill in the details below to publish your item on the marketplace.</p>
+      </div>
+
+      <form id="listing-form">
+        <div class="form-card">
+
+          <!-- Product Media -->
+          <div class="form-section">
+            <div class="form-section-title">
+              <div class="icon"><i class="fa-solid fa-image"></i></div>
+              <h3>Product Media</h3>
+            </div>
+
+            <div class="media-row">
+              <div class="upload-box" id="upload-box">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <span class="primary">Click or drag to upload an image</span>
+                <span class="secondary">PNG or JPG, up to 5MB each</span>
+                <input type="file" id="file-input" accept="image/*" multiple hidden>
+              </div>
+              <div class="thumb-grid" id="thumb-grid">
+                <div class="thumb-slot" style="background-image:url('https://images.unsplash.com/photo-1592841200221-a6898f307baa?w=200&h=200&fit=crop')"></div>
+                <div class="thumb-slot" style="background-image:url('https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=200&h=200&fit=crop')"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Basic Information -->
+          <div class="form-section">
+            <div class="form-section-title">
+              <div class="icon"><i class="fa-solid fa-circle-info"></i></div>
+              <h3>Basic Information</h3>
+            </div>
+
+            <div class="field-row cols-2">
+              <div class="field">
+                <label for="product-name">Product Name</label>
+                <input type="text" id="product-name" placeholder="e.g. Organic Heirloom Tomatoes">
+              </div>
+              <div class="field">
+                <label for="category">Category</label>
+                <select id="category">
+                  <option value="">Select a category</option>
+                  <option>Vegetables</option>
+                  <option>Fruits</option>
+                  <option>Grains &amp; Cereals</option>
+                  <option>Dairy &amp; Eggs</option>
+                  <option>Herbs &amp; Spices</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field-row cols-2">
+              <div class="field">
+                <label for="farm">Facility / Farm</label>
+                <input type="text" id="farm" placeholder="e.g. Green Valley Farm">
+              </div>
+              <div class="field">
+                <label>Tags <span class="hint">(press Enter to add)</span></label>
+                <div class="tag-input-box" id="tag-box">
+                  <span class="tag-chip">Organic <button type="button" data-remove-tag>×</button></span>
+                  <span class="tag-chip">Fresh <button type="button" data-remove-tag>×</button></span>
+                  <input type="text" id="tag-input" placeholder="Add a tag…">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pricing & Inventory -->
+          <div class="form-section">
+            <div class="form-section-title">
+              <div class="icon"><i class="fa-solid fa-tag"></i></div>
+              <h3>Pricing &amp; Inventory</h3>
+            </div>
+
+            <div class="field-row cols-3">
+              <div class="field">
+                <label for="price">Price / Unit</label>
+                <div class="input-affix">
+                  <span>$</span>
+                  <input type="number" id="price" placeholder="0.00" min="0" step="0.01">
+                </div>
+              </div>
+              <div class="field">
+                <label for="unit-type">Unit Type</label>
+                <select id="unit-type">
+                  <option>lb</option>
+                  <option>kg</option>
+                  <option>bunch</option>
+                  <option>dozen</option>
+                  <option>crate</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="stock">Stock Quantity</label>
+                <input type="number" id="stock" placeholder="0" min="0">
+              </div>
+            </div>
+          </div>
+
+          <!-- Harvesting Details -->
+          <div class="form-section">
+            <div class="form-section-title">
+              <div class="icon"><i class="fa-solid fa-calendar-days"></i></div>
+              <h3>Harvesting Details</h3>
+            </div>
+
+            <div class="field-row cols-2">
+              <div class="field">
+                <label for="harvest-date">Harvest Date</label>
+                <input type="date" id="harvest-date">
+              </div>
+              <div class="field">
+                <label for="shelf-life">Estimated Shelf Life</label>
+                <input type="text" id="shelf-life" placeholder="e.g. 7 days">
+              </div>
+            </div>
+          </div>
+
+          <!-- Detailed Description -->
+          <div class="form-section">
+            <div class="form-section-title">
+              <div class="icon"><i class="fa-solid fa-align-left"></i></div>
+              <h3>Detailed Description</h3>
+            </div>
+
+            <div class="field">
+              <div class="editor-toolbar">
+                <button type="button" title="Bold"><i class="fa-solid fa-bold"></i></button>
+                <button type="button" title="Italic"><i class="fa-solid fa-italic"></i></button>
+                <button type="button" title="Bullet list"><i class="fa-solid fa-list-ul"></i></button>
+              </div>
+              <textarea id="description" placeholder="Describe your product, growing methods, freshness, and packaging…"></textarea>
+            </div>
+          </div>
+
+          <div class="form-footer">
+            <span class="char-count" id="char-count">0 / 600 characters</span>
+            <button type="button" class="btn btn-outline" id="save-draft-btn">Save as Draft</button>
+            <button type="submit" class="btn btn-primary" id="publish-btn"><i class="fa-solid fa-arrow-right"></i>Publish Listing</button>
+          </div>
+
+        </div>
+      </form>
+
+    </main>
+  </div>
+</div>
+
+<div class="toast" id="toast">
+  <i class="fa-solid fa-circle-check"></i>
+  <span id="toast-text">Saved</span>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
