@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign In · AgroMarket</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-body">
+
+<div class="auth-shell">
+
+  <!-- Hero side -->
+  <div class="auth-hero auth-hero-art">
+    <a href="login.html" class="auth-hero-brand">
+      <div class="brand-mark"><i class="fa-solid fa-seedling"></i></div>
+      <span>AgroMarket</span>
+    </a>
+    <div class="auth-hero-copy">
+      <h1>Welcome back to the field.</h1>
+      <p>Access your agricultural marketplace, manage your business, and stay updated with agricultural trends.</p>
+    </div>
+    <div class="auth-hero-footer">© 2026 AgroMarket Inc. All rights reserved.</div>
+  </div>
+
+  <!-- Form side -->
+  <div class="auth-form-panel">
+    <div class="auth-form-wrap">
+      <h2>Sign In</h2>
+      <p class="auth-sub">Manage your agricultural operations</p>
+
+      <form id="login-form">
+        <div class="field">
+          <label for="email">Email address</label>
+          <div class="input-icon">
+            <i class="fa-solid fa-envelope"></i>
+            <input type="email" id="email" placeholder="farmer@agromarket.com" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="field-label-row">
+            <label for="password">Password</label>
+            <a href="forgot-passwor.html" class="inline-link">Forgot Password?</a>
+          </div>
+          <div class="input-icon">
+            <i class="fa-solid fa-lock"></i>
+            <input type="password" id="password" placeholder="••••••••" required>
+            <button type="button" class="reveal-btn" data-toggle-password="password" aria-label="Show password"><i class="fa-solid fa-eye"></i></button>
+          </div>
+        </div>
+
+        <label class="checkbox-row">
+          <input type="checkbox" id="remember">
+          <span>Remember me</span>
+        </label>
+
+        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+
+        <div class="auth-divider"><span>Or continue with</span></div>
+
+        <button type="button" class="btn btn-outline btn-block">
+          <i class="fa-brands fa-google"></i> Google
+        </button>
+      </form>
+
+      <p class="auth-switch">Don't have an account? <a href="signup.html">Sign Up</a></p>
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast">
+  <i class="fa-solid fa-circle-check"></i>
+  <span id="toast-text">Signed in</span>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

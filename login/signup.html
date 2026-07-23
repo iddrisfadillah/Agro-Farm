@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create an Account · AgroMarket</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-body">
+
+<header class="marketing-nav">
+  <a href="signup.html" class="marketing-brand">
+    <div class="brand-mark sm"><i class="fa-solid fa-seedling"></i></div>
+    <span>AgroMarket</span>
+  </a>
+  <nav class="marketing-links">
+    <a href="#">Marketplace</a>
+    <a href="#">Resources</a>
+  </nav>
+  <a href="login.html" class="btn btn-primary btn-sm">Sign In</a>
+</header>
+
+<div class="auth-shell">
+
+  <!-- Hero side -->
+  <div class="auth-hero split-panels">
+    <div class="split-panel tone-1"><i class="fa-solid fa-handshake"></i></div>
+    <div class="split-panel tone-2"><i class="fa-solid fa-basket-shopping"></i></div>
+    <div class="split-panel tone-3"><i class="fa-solid fa-truck-fast"></i></div>
+    <div class="split-overlay"></div>
+    <div class="auth-hero-copy">
+      <h1>Join the Future of Agriculture.</h1>
+      <p>Connect directly with buyers and ensure freshness from field to table. Empowering farmers with technology and transparency.</p>
+    </div>
+  </div>
+
+  <!-- Form side -->
+  <div class="auth-form-panel">
+    <div class="auth-form-wrap">
+      <h2>Create an account</h2>
+      <p class="auth-sub">Start your journey into a more sustainable supply chain.</p>
+
+      <div class="role-toggle" id="role-toggle">
+        <button type="button" class="role-btn active" data-role="buyer"><i class="fa-solid fa-basket-shopping"></i>I am a Buyer</button>
+        <button type="button" class="role-btn" data-role="farmer"><i class="fa-solid fa-tractor"></i>I am a Farmer</button>
+      </div>
+
+      <form id="signup-form">
+        <div class="field">
+          <label for="full-name">Full Name</label>
+          <div class="input-icon">
+            <i class="fa-solid fa-user"></i>
+            <input type="text" id="full-name" placeholder="John Doe" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="signup-email">Email Address</label>
+          <div class="input-icon">
+            <i class="fa-solid fa-envelope"></i>
+            <input type="email" id="signup-email" placeholder="john@example.com" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="phone">Phone Number</label>
+          <div class="input-icon">
+            <i class="fa-solid fa-phone"></i>
+            <input type="tel" id="phone" placeholder="+1 (800) 000-0000">
+          </div>
+        </div>
+
+        <div class="field-row cols-2">
+          <div class="field">
+            <label for="signup-password">Password</label>
+            <div class="input-icon">
+              <i class="fa-solid fa-lock"></i>
+              <input type="password" id="signup-password" placeholder="••••••••" required>
+              <button type="button" class="reveal-btn" data-toggle-password="signup-password" aria-label="Show password"><i class="fa-solid fa-eye"></i></button>
+            </div>
+          </div>
+          <div class="field">
+            <label for="confirm-password">Confirm Password</label>
+            <div class="input-icon">
+              <i class="fa-solid fa-lock"></i>
+              <input type="password" id="confirm-password" placeholder="••••••••" required>
+              <button type="button" class="reveal-btn" data-toggle-password="confirm-password" aria-label="Show password"><i class="fa-solid fa-eye"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <label class="checkbox-row">
+          <input type="checkbox" id="agree-terms" required>
+          <span>I agree to the <a href="#" class="inline-link">Terms of Service</a> and <a href="#" class="inline-link">Privacy Policy</a></span>
+        </label>
+
+        <button type="submit" class="btn btn-primary btn-block">Create Account <i class="fa-solid fa-arrow-right"></i></button>
+      </form>
+
+      <p class="auth-switch">Already have an account? <a href="login.html">Sign In</a></p>
+    </div>
+  </div>
+
+</div>
+
+<footer class="marketing-footer">
+  <div class="marketing-brand">
+    <div class="brand-mark sm"><i class="fa-solid fa-seedling"></i></div>
+    <span>AgroMarket</span>
+  </div>
+  <nav class="footer-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms of Service</a>
+    <a href="#">Help Center</a>
+    <a href="#">Cookie Settings</a>
+  </nav>
+  <span class="text-muted">© 2026 AgroMarket Inc. All rights reserved.</span>
+</footer>
+
+<div class="toast" id="toast">
+  <i class="fa-solid fa-circle-check"></i>
+  <span id="toast-text">Account created</span>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
