@@ -34,21 +34,21 @@
 
       <form id="login-form">
         <div class="field">
-          <label for="email">Email address</label>
+          <label for="phone">Phone number</label>
           <div class="input-icon">
-            <i class="fa-solid fa-envelope"></i>
-            <input type="email" id="email" placeholder="farmer@agromarket.com" required>
+            <i class="fa-solid fa-phone"></i>
+            <input type="tel" id="phone" name="phone" placeholder="+233 200 000 000" autocomplete="tel" required>
           </div>
         </div>
 
         <div class="field">
           <div class="field-label-row">
             <label for="password">Password</label>
-            <a href="forgot-passwor.html" class="inline-link">Forgot Password?</a>
+            <a href="forgot-password.html" class="inline-link">Forgot Password?</a>
           </div>
           <div class="input-icon">
             <i class="fa-solid fa-lock"></i>
-            <input type="password" id="password" placeholder="••••••••" required>
+            <input type="password" id="password" name="password" placeholder="••••••••" autocomplete="current-password" required>
             <button type="button" class="reveal-btn" data-toggle-password="password" aria-label="Show password"><i class="fa-solid fa-eye"></i></button>
           </div>
         </div>

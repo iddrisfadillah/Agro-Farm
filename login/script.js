@@ -62,10 +62,13 @@ function initAuthForms() {
       e.preventDefault();
       // TODO: replace with a real authentication API call
       showToast('Signed in successfully');
+      
+      const phoneInput = document.getElementById('phone') || document.getElementById('email');
+      
       console.log('Login payload:', {
-        email: document.getElementById('email').value,
-        password: document.getElementById('password').value,
-        remember: document.getElementById('remember').checked,
+        phone: phoneInput ? phoneInput.value : '',
+        password: document.getElementById('password')?.value || '',
+        remember: document.getElementById('remember')?.checked || false,
       });
     });
   }

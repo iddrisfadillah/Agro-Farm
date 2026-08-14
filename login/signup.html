@@ -49,11 +49,14 @@
       </div>
 
       <form id="signup-form">
+        <!-- Hidden input to store selected role for form processing -->
+        <input type="hidden" id="role" name="role" value="buyer">
+
         <div class="field">
-          <label for="full-name">Full Name</label>
+          <label for="name">Name</label>
           <div class="input-icon">
             <i class="fa-solid fa-user"></i>
-            <input type="text" id="full-name" placeholder="John Doe" required>
+            <input type="text" id="name" name="name" placeholder="John Doe" required>
           </div>
         </div>
 
@@ -61,7 +64,7 @@
           <label for="signup-email">Email Address</label>
           <div class="input-icon">
             <i class="fa-solid fa-envelope"></i>
-            <input type="email" id="signup-email" placeholder="john@example.com" required>
+            <input type="email" id="signup-email" name="email" placeholder="john@example.com" required>
           </div>
         </div>
 
@@ -69,7 +72,7 @@
           <label for="phone">Phone Number</label>
           <div class="input-icon">
             <i class="fa-solid fa-phone"></i>
-            <input type="tel" id="phone" placeholder="+1 (800) 000-0000">
+            <input type="tel" id="phone" name="phone" placeholder="+233 200 000 000" autocomplete="tel" required>
           </div>
         </div>
 
@@ -78,7 +81,7 @@
             <label for="signup-password">Password</label>
             <div class="input-icon">
               <i class="fa-solid fa-lock"></i>
-              <input type="password" id="signup-password" placeholder="••••••••" required>
+              <input type="password" id="signup-password" name="password" placeholder="••••••••" required>
               <button type="button" class="reveal-btn" data-toggle-password="signup-password" aria-label="Show password"><i class="fa-solid fa-eye"></i></button>
             </div>
           </div>
