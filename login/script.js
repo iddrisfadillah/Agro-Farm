@@ -1,6 +1,8 @@
 // ===================== AgroMarket — Auth Pages Script =====================
 // Used only by: login.html, signup.html, forgot-password.html
 
+const API_BASE = 'http://127.0.0.1:8000/api'
+
 document.addEventListener('DOMContentLoaded', () => {
   initPasswordReveal();
   initRoleToggle();
@@ -56,23 +58,67 @@ function initRoleToggle() {
 /* ---------- Auth form submissions ---------- */
 
 function initAuthForms() {
+  // ===================== LOGIN (Connected to Backend) =====================
   const loginForm = document.getElementById('login-form');
   if (loginForm) {
-    loginForm.addEventListener('submit', (e) => {
+    // loginForm.addEventListener('submit', (e) => {
+      loginForm.addEventListener('submit', async (e) => {   // ← async is important
       e.preventDefault();
       // TODO: replace with a real authentication API call
+const phoneInput = document.getElementById('phone') || document.getElementById('email');
+      const phone = phoneInput ? phoneInput.value.trim() : '';
+      const password = document.getElementById('password')?.value || '';
+
+      if (!phone || !password) {
+        showToast('Please enter phone and password');
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API_BASE}/auth/login`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            phone: phone,
+            password: password
+          })
+        });
+
+        const data = await res.json();
+
+        if (data.status === true) {
+          // Save token
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('user', JSON.stringify(data.user));
+
       showToast('Signed in successfully');
       
-      const phoneInput = document.getElementById('phone') || document.getElementById('email');
+
+      // Optional: Redirect after login
+          // window.location.href = 'index.html';
+        } else {
+          showToast(data.message || 'Invalid phone or password');
+        }
+
+      } catch (error) {
+        console.error(error);
+        showToast('Network error. Is the backend running?');
+      }
+
+      // const phoneInput = document.getElementById('phone') || document.getElementById('email');
       
-      console.log('Login payload:', {
-        phone: phoneInput ? phoneInput.value : '',
-        password: document.getElementById('password')?.value || '',
-        remember: document.getElementById('remember')?.checked || false,
-      });
+      // console.log('Login payload:', {
+      //   phone: phoneInput ? phoneInput.value : '',
+      //   password: document.getElementById('password')?.value || '',
+      //   remember: document.getElementById('remember')?.checked || false,
+      // });
     });
   }
 
+  // ===================== SIGNUP (Untouched) =====================
   const signupForm = document.getElementById('signup-form');
   if (signupForm) {
     signupForm.addEventListener('submit', (e) => {
