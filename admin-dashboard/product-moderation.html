@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Moderation · AgroMarket Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark"><i class="fa-solid fa-seedling"></i></div>
+      <div class="brand-text">
+        <div class="name">AgroMarket</div>
+        <div class="sub">Admin Portal</div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a class="nav-item" href="index.html"><i class="fa-solid fa-table-cells-large"></i>Dashboard</a>
+      <a class="nav-item" href="user-management.html"><i class="fa-solid fa-users"></i>User Management</a>
+      <a class="nav-item active" href="product-moderation.html"><i class="fa-solid fa-clipboard-check"></i>Product Moderation</a>
+      <a class="nav-item" href="global-orders.html"><i class="fa-solid fa-globe"></i>Global Orders</a>
+      <a class="nav-item" href="settings.html"><i class="fa-solid fa-gear"></i>Settings</a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a class="nav-item" href="#"><i class="fa-solid fa-circle-question"></i>Support</a>
+      <a class="nav-item" href="../login/login.html"><i class="fa-solid fa-right-from-bracket"></i>Sign Out</a>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="main">
+    <header class="topbar">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Search pending products, farmers…">
+      </div>
+      <div class="topbar-actions">
+        <button class="icon-btn" aria-label="Notifications"><i class="fa-solid fa-bell"></i><span class="dot"></span></button>
+        <button class="icon-btn" aria-label="Settings"><i class="fa-solid fa-gear"></i></button>
+        <div class="avatar">AK</div>
+      </div>
+    </header>
+
+    <main class="content">
+      <div class="page-head">
+        <div>
+          <h1>Product Moderation</h1>
+          <p>Review and approve new listings from verified farmers.</p>
+        </div>
+        <div class="page-head-actions">
+          <button class="btn btn-outline" id="refresh-btn"><i class="fa-solid fa-rotate-right"></i>Refresh</button>
+        </div>
+      </div>
+
+      <div class="card-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Product Name</th>
+              <th>Farmer</th>
+              <th>Category</th>
+              <th>Price (GH₵)</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="moderation-tbody">
+            <tr data-row>
+              <td>
+                <div class="product-cell">
+                  <div class="product-thumb" style="background-image:url('https://images.unsplash.com/photo-1610725664285-7c57e6eeac3f?w=100&h=100&fit=crop')"></div>
+                  <div class="product-cell-body">
+                    <strong>Premium Organic Cocoa</strong>
+                    <span>ID: PRO-0821</span>
+                  </div>
+                </div>
+              </td>
+              <td>Kofi Mensah Farms</td>
+              <td><span class="pill gray">Produce</span></td>
+              <td>450.00 / bag</td>
+              <td><span class="pill blue">Pending Review</span></td>
+              <td class="row-actions">
+                <button class="icon-btn-sm" aria-label="View details"><i class="fa-solid fa-eye"></i></button>
+                <button class="icon-btn-sm approve" aria-label="Approve listing" data-action="approve"><i class="fa-solid fa-check"></i></button>
+                <button class="icon-btn-sm reject" aria-label="Reject listing" data-action="reject"><i class="fa-solid fa-xmark"></i></button>
+              </td>
+            </tr>
+
+            <tr data-row>
+              <td>
+                <div class="product-cell">
+                  <div class="product-thumb" style="background-image:url('https://images.unsplash.com/photo-1587049633312-d628ae50a8ae?w=100&h=100&fit=crop')"></div>
+                  <div class="product-cell-body">
+                    <strong>Sun-Dried Plantain Chips</strong>
+                    <span>ID: PRO-0822</span>
+                  </div>
+                </div>
+              </td>
+              <td>Ama Serwaa Co-op</td>
+              <td><span class="pill gray">Processed</span></td>
+              <td>28.00 / pack</td>
+              <td><span class="pill blue">Pending Review</span></td>
+              <td class="row-actions">
+                <button class="icon-btn-sm" aria-label="View details"><i class="fa-solid fa-eye"></i></button>
+                <button class="icon-btn-sm approve" aria-label="Approve listing" data-action="approve"><i class="fa-solid fa-check"></i></button>
+                <button class="icon-btn-sm reject" aria-label="Reject listing" data-action="reject"><i class="fa-solid fa-xmark"></i></button>
+              </td>
+            </tr>
+
+            <tr data-row>
+              <td>
+                <div class="product-cell">
+                  <div class="product-thumb" style="background-image:url('https://images.unsplash.com/photo-1594282486552-05b4d80fbb9f?w=100&h=100&fit=crop')"></div>
+                  <div class="product-cell-body">
+                    <strong>Free-Range Eggs (Crate)</strong>
+                    <span>ID: PRO-0823</span>
+                  </div>
+                </div>
+              </td>
+              <td>Nana Yaw Poultry</td>
+              <td><span class="pill gray">Dairy &amp; Eggs</span></td>
+              <td>85.00 / crate</td>
+              <td><span class="pill blue">Pending Review</span></td>
+              <td class="row-actions">
+                <button class="icon-btn-sm" aria-label="View details"><i class="fa-solid fa-eye"></i></button>
+                <button class="icon-btn-sm approve" aria-label="Approve listing" data-action="approve"><i class="fa-solid fa-check"></i></button>
+                <button class="icon-btn-sm reject" aria-label="Reject listing" data-action="reject"><i class="fa-solid fa-xmark"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="empty-state" id="empty-state" style="display:none;">
+          <i class="fa-solid fa-clipboard-check"></i>
+          All caught up — no listings waiting for review.
+        </div>
+
+        <div class="table-footer">
+          <span class="text-muted" id="count-label">Showing 3 of 3 pending listings</span>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<div class="toast" id="toast">
+  <i class="fa-solid fa-circle-check"></i>
+  <span id="toast-text">Saved</span>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

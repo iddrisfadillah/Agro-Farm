@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Overview · AgroMarket Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark"><i class="fa-solid fa-seedling"></i></div>
+      <div class="brand-text">
+        <div class="name">AgroMarket</div>
+        <div class="sub">Admin Portal</div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a class="nav-item active" href="index.html"><i class="fa-solid fa-table-cells-large"></i>Dashboard</a>
+      <a class="nav-item" href="user-management.html"><i class="fa-solid fa-users"></i>User Management</a>
+      <a class="nav-item" href="product-moderation.html"><i class="fa-solid fa-clipboard-check"></i>Product Moderation</a>
+      <a class="nav-item" href="global-orders.html"><i class="fa-solid fa-globe"></i>Global Orders</a>
+      <a class="nav-item" href="settings.html"><i class="fa-solid fa-gear"></i>Settings</a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a class="nav-item" href="#"><i class="fa-solid fa-circle-question"></i>Support</a>
+      <a class="nav-item" href="../login/login.html"><i class="fa-solid fa-right-from-bracket"></i>Sign Out</a>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="main">
+    <header class="topbar">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Search orders, users, or IDs…">
+      </div>
+      <div class="topbar-actions">
+        <button class="icon-btn" aria-label="Notifications"><i class="fa-solid fa-bell"></i><span class="dot"></span></button>
+        <button class="icon-btn" aria-label="Settings"><i class="fa-solid fa-gear"></i></button>
+        <div class="avatar">AK</div>
+      </div>
+    </header>
+
+    <main class="content">
+      <div class="page-head">
+        <div>
+          <h1>Market Overview</h1>
+          <p>Live data for logistics and wholesale operations.</p>
+        </div>
+        <div class="page-head-actions">
+          <button class="btn btn-outline"><i class="fa-solid fa-file-arrow-down"></i>Export Report</button>
+          <button class="btn btn-primary"><i class="fa-solid fa-plus"></i>New Directive</button>
+        </div>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card tint-green">
+          <div class="stat-top">
+            <span class="stat-label">Total Revenue (GH₵)</span>
+            <div class="stat-icon"><i class="fa-solid fa-sack-dollar"></i></div>
+          </div>
+          <div class="stat-value">GH₵ 1.42M</div>
+          <div class="stat-sub up"><i class="fa-solid fa-arrow-trend-up"></i> +12.5% this month</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-top">
+            <span class="stat-label">Active Users</span>
+            <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+          </div>
+          <div class="stat-value">24,592</div>
+          <div class="stat-sub up"><i class="fa-solid fa-arrow-trend-up"></i> +5.2% this month</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-top">
+            <span class="stat-label">Pending Tasks</span>
+            <div class="stat-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+          </div>
+          <div class="stat-value">184</div>
+          <div class="stat-sub warn"><i class="fa-solid fa-circle-exclamation"></i> 15 require immediate action</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-top">
+            <span class="stat-label">Active Listings</span>
+            <div class="stat-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
+          </div>
+          <div class="stat-value">8,903</div>
+          <div class="stat-sub">— steady supply</div>
+        </div>
+      </div>
+
+      <div class="dash-grid">
+        <div class="card">
+          <div class="section-head">
+            <h2>Platform Activity (30 Days)</h2>
+            <div class="tabs">
+              <button class="active" data-metric="all">All</button>
+              <button data-metric="rev">Rev</button>
+            </div>
+          </div>
+          <div class="chart-wrap">
+            <svg viewBox="0 0 600 220" width="100%" height="220" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#2F6F4E" stop-opacity="0.22"/>
+                  <stop offset="100%" stop-color="#2F6F4E" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <g stroke="#E6E6E1" stroke-width="1">
+                <line x1="0" y1="20" x2="600" y2="20"/>
+                <line x1="0" y1="70" x2="600" y2="70"/>
+                <line x1="0" y1="120" x2="600" y2="120"/>
+                <line x1="0" y1="170" x2="600" y2="170"/>
+              </g>
+              <path d="M0,150 C60,140 90,100 150,105 C210,110 230,150 290,140 C350,130 380,60 440,55 C500,50 520,90 600,40 L600,220 L0,220 Z" fill="url(#areaFill)"/>
+              <path d="M0,150 C60,140 90,100 150,105 C210,110 230,150 290,140 C350,130 380,60 440,55 C500,50 520,90 600,40" fill="none" stroke="#2F6F4E" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+            <div class="chart-axis">
+              <span>1st</span><span>8th</span><span>15th</span><span>22nd</span><span>30th</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="section-head">
+            <h2>System Alerts</h2>
+          </div>
+          <div class="alert-list">
+            <div class="alert-item">
+              <div class="alert-top">
+                <span class="alert-tag critical">Critical</span>
+                <span class="alert-time">2m ago</span>
+              </div>
+              <strong>Payment API Latency Spike</strong>
+              <p>Gateway response times exceeding 2000ms. Operations team notified automatically.</p>
+            </div>
+            <div class="alert-item">
+              <div class="alert-top">
+                <span class="alert-tag warning">Warning</span>
+                <span class="alert-time">15m ago</span>
+              </div>
+              <strong>Suspicious Listing Activity</strong>
+              <p>Multiple reports flagged on vendor ID #84920 for price gouging.</p>
+            </div>
+            <div class="alert-item">
+              <div class="alert-top">
+                <span class="alert-tag info">Info</span>
+                <span class="alert-time">1h ago</span>
+              </div>
+              <strong>Database Sync Complete</strong>
+              <p>Regional nodes successfully synchronized.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<div class="toast" id="toast">
+  <i class="fa-solid fa-circle-check"></i>
+  <span id="toast-text">Saved</span>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Management · AgroMarket Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark"><i class="fa-solid fa-seedling"></i></div>
+      <div class="brand-text">
+        <div class="name">AgroMarket</div>
+        <div class="sub">Admin Portal</div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a class="nav-item" href="index.html"><i class="fa-solid fa-table-cells-large"></i>Dashboard</a>
+      <a class="nav-item active" href="user-management.html"><i class="fa-solid fa-users"></i>User Management</a>
+      <a class="nav-item" href="product-moderation.html"><i class="fa-solid fa-clipboard-check"></i>Product Moderation</a>
+      <a class="nav-item" href="global-orders.html"><i class="fa-solid fa-globe"></i>Global Orders</a>
+      <a class="nav-item" href="settings.html"><i class="fa-solid fa-gear"></i>Settings</a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a class="nav-item" href="#"><i class="fa-solid fa-circle-question"></i>Support</a>
+      <a class="nav-item" href="../login/login.html"><i class="fa-solid fa-right-from-bracket"></i>Sign Out</a>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="main">
+    <header class="topbar">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Search users, IDs, or emails…">
+      </div>
+      <div class="topbar-actions">
+        <button class="icon-btn" aria-label="Notifications"><i class="fa-solid fa-bell"></i><span class="dot"></span></button>
+        <button class="icon-btn" aria-label="Settings"><i class="fa-solid fa-gear"></i></button>
+        <div class="avatar">AK</div>
+      </div>
+    </header>
+
+    <main class="content">
+      <div class="page-head">
+        <div>
+          <h1>User Management</h1>
+          <p>Manage network participants, roles, and access credentials.</p>
+        </div>
+        <div class="page-head-actions">
+          <button class="btn btn-outline"><i class="fa-solid fa-file-arrow-down"></i>Export CSV</button>
+          <button class="btn btn-primary"><i class="fa-solid fa-user-plus"></i>Add User</button>
+        </div>
+      </div>
+
+      <div class="stats-row" style="grid-template-columns:repeat(3,1fr);">
+        <div class="stat-card tint-green">
+          <div class="stat-top"><span class="stat-label">Total Users</span></div>
+          <div class="stat-value">12,458 <span class="stat-sub up" style="display:inline;">+3.8%</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-top"><span class="stat-label">New Registrations Today</span></div>
+          <div class="stat-value">142 <span class="stat-sub up" style="display:inline;">+12%</span></div>
+        </div>
+        <div class="stat-card tint-red">
+          <div class="stat-top"><span class="stat-label">Flagged Accounts</span></div>
+          <div class="stat-value">18</div>
+          <div class="stat-sub warn">Requires review</div>
+        </div>
+      </div>
+
+      <div class="card-table">
+        <div class="table-toolbar">
+          <div class="table-toolbar-left">
+            <select class="select-filter">
+              <option>All Roles</option>
+              <option>Farmer</option>
+              <option>Buyer</option>
+              <option>Logistics</option>
+            </select>
+            <select class="select-filter">
+              <option>All Regions</option>
+              <option>Ashanti</option>
+              <option>Greater Accra</option>
+              <option>Northern</option>
+            </select>
+            <a href="#" class="more-filters"><i class="fa-solid fa-sliders"></i>More Filters</a>
+          </div>
+          <div class="table-toolbar-right">
+            <span class="text-muted" id="selected-count">0 selected</span>
+            <button class="btn btn-outline btn-sm">Suspend</button>
+            <button class="btn btn-outline btn-sm">Verify</button>
+          </div>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th class="checkbox-col"><input type="checkbox" id="select-all"></th>
+              <th>User</th>
+              <th>Role</th>
+              <th>Region</th>
+              <th>Status</th>
+              <th>Last Login</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="checkbox-col"><input type="checkbox" class="row-check"></td>
+              <td>
+                <div class="user-cell">
+                  <div class="user-avatar">KA</div>
+                  <div class="user-cell-body">
+                    <strong>Kwame Appiah</strong>
+                    <span>k.appiah@example.com</span>
+                  </div>
+                </div>
+              </td>
+              <td><span class="tag-role">Farmer</span></td>
+              <td>Ashanti</td>
+              <td><span class="status-dot verified">Verified</span></td>
+              <td class="text-muted">2 hours ago</td>
+              <td><button class="icon-btn-sm" aria-label="More options"><i class="fa-solid fa-ellipsis-vertical"></i></button></td>
+            </tr>
+            <tr>
+              <td class="checkbox-col"><input type="checkbox" class="row-check"></td>
+              <td>
+                <div class="user-cell">
+                  <div class="user-avatar">AM</div>
+                  <div class="user-cell-body">
+                    <strong>Abena Mensah</strong>
+                    <span>abena.m@logistics.gh</span>
+                  </div>
+                </div>
+              </td>
+              <td><span class="tag-role logistics">Logistics</span></td>
+              <td>Greater Accra</td>
+              <td><span class="status-dot pending">Pending</span></td>
+              <td class="text-muted">Yesterday</td>
+              <td><button class="icon-btn-sm" aria-label="More options"><i class="fa-solid fa-ellipsis-vertical"></i></button></td>
+            </tr>
+            <tr>
+              <td class="checkbox-col"><input type="checkbox" class="row-check"></td>
+              <td>
+                <div class="user-cell">
+                  <div class="user-avatar">SO</div>
+                  <div class="user-cell-body">
+                    <strong>Samuel Osei</strong>
+                    <span>samuel@agribuy.net</span>
+                  </div>
+                </div>
+              </td>
+              <td><span class="tag-role buyer">Buyer</span></td>
+              <td>Northern</td>
+              <td><span class="status-dot suspended">Suspended</span></td>
+              <td class="text-muted">Oct 12, 2023</td>
+              <td><button class="icon-btn-sm" aria-label="More options"><i class="fa-solid fa-ellipsis-vertical"></i></button></td>
+            </tr>
+            <tr>
+              <td class="checkbox-col"><input type="checkbox" class="row-check"></td>
+              <td>
+                <div class="user-cell">
+                  <div class="user-avatar">ED</div>
+                  <div class="user-cell-body">
+                    <strong>Emmanuel Darko</strong>
+                    <span>edarko@farmo.gh</span>
+                  </div>
+                </div>
+              </td>
+              <td><span class="tag-role">Farmer</span></td>
+              <td>Ashanti</td>
+              <td><span class="status-dot verified">Verified</span></td>
+              <td class="text-muted">10 mins ago</td>
+              <td><button class="icon-btn-sm" aria-label="More options"><i class="fa-solid fa-ellipsis-vertical"></i></button></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="table-footer">
+          <span class="text-muted">Showing 1 to 4 of 12,458 entries</span>
+          <div class="pagination">
+            <button class="page-btn" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<div class="toast" id="toast">
+  <i class="fa-solid fa-circle-check"></i>
+  <span id="toast-text">Saved</span>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

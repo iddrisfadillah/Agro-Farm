@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Global Orders · AgroMarket Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark"><i class="fa-solid fa-seedling"></i></div>
+      <div class="brand-text">
+        <div class="name">AgroMarket</div>
+        <div class="sub">Admin Portal</div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a class="nav-item" href="index.html"><i class="fa-solid fa-table-cells-large"></i>Dashboard</a>
+      <a class="nav-item" href="user-management.html"><i class="fa-solid fa-users"></i>User Management</a>
+      <a class="nav-item" href="product-moderation.html"><i class="fa-solid fa-clipboard-check"></i>Product Moderation</a>
+      <a class="nav-item active" href="global-orders.html"><i class="fa-solid fa-globe"></i>Global Orders</a>
+      <a class="nav-item" href="settings.html"><i class="fa-solid fa-gear"></i>Settings</a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a class="nav-item" href="#"><i class="fa-solid fa-circle-question"></i>Support</a>
+      <a class="nav-item" href="../login/login.html"><i class="fa-solid fa-right-from-bracket"></i>Sign Out</a>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="main">
+    <header class="topbar">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Search orders…">
+      </div>
+      <div class="topbar-actions">
+        <button class="icon-btn" aria-label="Notifications"><i class="fa-solid fa-bell"></i><span class="dot"></span></button>
+        <button class="icon-btn" aria-label="Settings"><i class="fa-solid fa-gear"></i></button>
+        <div class="avatar">AK</div>
+      </div>
+    </header>
+
+    <main class="content">
+      <div class="page-head">
+        <div>
+          <h1>Global Orders</h1>
+          <p>Real-time ledger and transit tracking.</p>
+        </div>
+        <div class="page-head-actions">
+          <button class="btn btn-outline"><i class="fa-solid fa-print"></i>Print Invoice</button>
+          <button class="btn btn-outline"><i class="fa-solid fa-file-arrow-down"></i>Export CSV</button>
+        </div>
+      </div>
+
+      <div class="orders-grid">
+        <div class="card-table">
+          <div class="table-toolbar">
+            <h2 style="font-size:15px;">Transaction Ledger</h2>
+            <button class="icon-btn-sm" aria-label="Filter"><i class="fa-solid fa-filter"></i></button>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>Buyer</th>
+                <th>Farmer</th>
+                <th>Amount (GH₵)</th>
+                <th>Payment</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="mono">#AAO-9000</td>
+                <td class="text-muted">Oct 24, 09:41</td>
+                <td>K. Mensah</td>
+                <td>Osei Farms</td>
+                <td>12,450.00</td>
+                <td>MoMo</td>
+                <td><span class="pill navy">Processing</span></td>
+              </tr>
+              <tr>
+                <td class="mono">#AAO-8999</td>
+                <td class="text-muted">Oct 24, 08:15</td>
+                <td>FoodCorp Ltd.</td>
+                <td>Ashanti Co-op</td>
+                <td>45,000.00</td>
+                <td>Bank Transfer</td>
+                <td><span class="pill green">Shipped</span></td>
+              </tr>
+              <tr>
+                <td class="mono">#AAO-8998</td>
+                <td class="text-muted">Oct 23, 16:30</td>
+                <td>A. Appiah</td>
+                <td>Green Valley</td>
+                <td>3,200.00</td>
+                <td>Cash</td>
+                <td><span class="pill red">Cancelled</span></td>
+              </tr>
+              <tr>
+                <td class="mono">#AAO-8997</td>
+                <td class="text-muted">Oct 23, 14:20</td>
+                <td>FreshMart Acc.</td>
+                <td>N. Yeboah</td>
+                <td>8,950.00</td>
+                <td>MoMo</td>
+                <td><span class="pill green">Delivered</span></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="table-footer">
+            <span class="text-muted">Showing 1-25 of 1,204</span>
+            <div class="pagination">
+              <button class="page-btn" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+              <button class="page-btn" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="transit-card">
+          <h3>Transit Hub Tracker</h3>
+          <div class="timeline">
+            <div class="timeline-stop delay">
+              <div class="timeline-dot"><i class="fa-solid fa-truck"></i></div>
+              <div class="timeline-head">
+                <strong>Kumasi Hub</strong>
+                <span class="status-tag delay">Delay</span>
+              </div>
+              <p>45 orders bottlenecked. Available fleet dispatching to clear backlog.</p>
+            </div>
+            <div class="timeline-stop">
+              <div class="timeline-dot"><i class="fa-solid fa-circle-check"></i></div>
+              <div class="timeline-head">
+                <strong>Accra Central</strong>
+                <span class="status-tag normal">Normal</span>
+              </div>
+              <p>Flowing efficiently. 120 dispatched today.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<div class="toast" id="toast">
+  <i class="fa-solid fa-circle-check"></i>
+  <span id="toast-text">Saved</span>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
