@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verify OTP · AgroMarket</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-body">
+
+  <header class="marketing-nav">
+    <a href="signup.html" class="marketing-brand">
+      <div class="brand-mark sm"><i class="fa-solid fa-seedling"></i></div>
+      <span>AgroMarket</span>
+    </a>
+    <nav class="marketing-links">
+      <a href="#">Marketplace</a>
+      <a href="#">Resources</a>
+    </nav>
+    <a href="login.html" class="btn btn-primary btn-sm">Sign In</a>
+  </header>
+
+  <div class="auth-shell">
+    <!-- Hero side -->
+    <div class="auth-hero split-panels">
+      <div class="split-panel tone-1"><i class="fa-solid fa-shield-halved"></i></div>
+      <div class="split-panel tone-2"><i class="fa-solid fa-mobile-screen"></i></div>
+      <div class="split-panel tone-3"><i class="fa-solid fa-check-double"></i></div>
+      <div class="split-overlay"></div>
+      <div class="auth-hero-copy">
+        <h1>Verify Your Phone Number</h1>
+        <p>We’ve sent a 6-digit code to your phone. Enter it below to activate your account.</p>
+      </div>
+    </div>
+
+    <!-- Form side -->
+    <div class="auth-form-panel">
+      <div class="auth-form-wrap">
+        <h2>Enter OTP</h2>
+        <p class="auth-sub">Check your phone for the verification code.</p>
+
+        <form id="otp-form">
+          <div class="field">
+            <label for="otp">Verification Code</label>
+            <div class="input-icon">
+              <i class="fa-solid fa-key"></i>
+              <input type="text" id="otp" name="otp" placeholder="Enter 6-digit code" maxlength="6" required>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block">
+            Verify Account <i class="fa-solid fa-check"></i>
+          </button>
+        </form>
+
+        <p class="auth-switch">
+          Didn’t receive the code? 
+          <a href="#" id="resend-otp">Resend OTP</a>
+        </p>
+
+        <p class="auth-switch">
+          <a href="signup.html">← Back to Sign Up</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">
+    <i class="fa-solid fa-circle-check"></i>
+    <span id="toast-text">OTP verified</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

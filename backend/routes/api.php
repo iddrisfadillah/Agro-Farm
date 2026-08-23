@@ -6,6 +6,9 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\ReviewController;
+use App\Http\Controllers\Api\SellerDashboardController;
+use App\Http\Controllers\Api\ChatController;
 
 // ====================== AUTH ROUTES ======================
 Route::prefix('auth')->group(function () {
@@ -65,4 +68,23 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/orders/{id}', [OrderController::class, 'show']);
     Route::get('/seller/orders', [OrderController::class, 'sellerOrders']);
     Route::post('/orders/{id}/status', [OrderController::class, 'updateStatus']);
+});
+
+// Review Routes
+Route::get('/products/{productId}/reviews', [ReviewController::class, 'productReviews']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/reviews', [ReviewController::class, 'store']);
+});
+// ====================== SELLER DASHBOARD ROUTES ======================
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/seller/dashboard', [SellerDashboardController::class, 'index']);
+});
+
+// ====================== CHAT ROUTES ======================
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/chat/conversations', [ChatController::class, 'conversations']);
+    Route::get('/chat/conversations/{id}/messages', [ChatController::class, 'messages']);
+    Route::post('/chat/start', [ChatController::class, 'start']);
+    Route::post('/chat/conversations/{id}/send', [ChatController::class, 'send']);
 });
