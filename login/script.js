@@ -118,28 +118,68 @@ const phoneInput = document.getElementById('phone') || document.getElementById('
     });
   }
 
-  // ===================== SIGNUP (Untouched) =====================
-  const signupForm = document.getElementById('signup-form');
-  if (signupForm) {
-    signupForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const pass = document.getElementById('signup-password').value;
-      const confirm = document.getElementById('confirm-password').value;
-      if (pass !== confirm) {
-        showToast("Passwords don't match");
-        return;
-      }
-      const role = document.querySelector('#role-toggle .role-btn.active')?.dataset.role || 'buyer';
-      // TODO: replace with a real account-creation API call
-      showToast('Account created successfully');
-      console.log('Signup payload:', {
-        role,
-        fullName: document.getElementById('full-name').value,
-        email: document.getElementById('signup-email').value,
-        phone: document.getElementById('phone').value,
+  // ===================== SIGNUP (Connected to Backend) =====================
+const signupForm = document.getElementById('signup-form');
+if (signupForm) {
+  signupForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const pass = document.getElementById('signup-password').value;
+    const confirm = document.getElementById('confirm-password').value;
+
+    if (pass !== confirm) {
+      showToast("Passwords don't match");
+      return;
+    }
+
+    // Get selected role (convert "farmer" → "seller")
+    let role = document.querySelector('#role-toggle .role-btn.active')?.dataset.role || 'buyer';
+    if (role === 'farmer') role = 'seller';
+
+    const payload = {
+      name: document.getElementById('name').value.trim(),
+      email: document.getElementById('signup-email').value.trim(),
+      phone: document.getElementById('phone').value.trim(),
+      password: pass,
+      password_confirmation: confirm,
+      role: role
+    };
+
+    try {
+      const res = await fetch(`${API_BASE}/auth/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(payload)
       });
-    });
-  }
+
+      const data = await res.json();
+
+      if (data.status === true) {
+        // Save phone for OTP verification
+        localStorage.setItem('pending_phone', payload.phone);
+        localStorage.setItem('temp_otp', data.otp); // only for testing
+
+        showToast('Account created! Please verify OTP');
+        console.log('OTP for testing:', data.otp);
+
+         // Redirect to OTP page
+          setTimeout(() => {
+          window.location.href = 'verify-otp.html';
+         }, 1200);
+
+      } else {
+        const firstError = Object.values(data.errors || {})[0]?.[0];
+        showToast(firstError || data.message || 'Registration failed');
+      }
+    } catch (error) {
+      console.error(error);
+      showToast('Network error. Is the backend running?');
+    }
+  });
+}
 
   const resetForm = document.getElementById('reset-form');
   if (resetForm) {
@@ -150,4 +190,68 @@ const phoneInput = document.getElementById('phone') || document.getElementById('
       console.log('Reset payload:', { email: document.getElementById('reset-email').value });
     });
   }
+
+// ===================== VERIFY OTP =====================
+const otpForm = document.getElementById('otp-form');
+if (otpForm) {
+  otpForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const otp = document.getElementById('otp').value.trim();
+    const phone = localStorage.getItem('pending_phone');
+
+    if (!phone) {
+      showToast('No pending registration found. Please sign up again.');
+      return;
+    }
+
+    if (!otp || otp.length !== 6) {
+      showToast('Please enter a valid 6-digit OTP');
+      return;
+    }
+
+    try {
+      const res = await fetch(`${API_BASE}/auth/verify-otp`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          phone: phone,
+          otp: otp
+        })
+      });
+
+      const data = await res.json();
+
+      if (data.status === true) {
+        // Save token and user
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify(data.user));
+        localStorage.removeItem('pending_phone');
+        localStorage.removeItem('temp_otp');
+
+        showToast('Phone verified successfully!');
+
+        // Redirect based on role
+        setTimeout(() => {
+       if (data.user.role === 'seller') {
+        window.location.href = '../farmer-dashboard/index.html';
+       } else {
+        window.location.href = '/index.html';
+        }
+       }, 1200);
+
+      } else {
+        showToast(data.message || 'Invalid or expired OTP');
+      }
+    } catch (error) {
+      console.error(error);
+      showToast('Network error. Please try again.');
+    }
+  });
+}
+
+
 }

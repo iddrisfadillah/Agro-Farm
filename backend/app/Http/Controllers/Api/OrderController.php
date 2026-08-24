@@ -147,47 +147,61 @@ class OrderController extends Controller
     }
 
     // Seller: Get orders that contain their products
-    public function sellerOrders(Request $request)
-    {
-        $orders = Order::whereHas('items', function ($query) use ($request) {
-                        $query->where('seller_id', $request->user()->id);
-                    })
-                    ->with(['items' => function ($query) use ($request) {
-                        $query->where('seller_id', $request->user()->id);
-                    }])
-                    ->latest()
-                    ->get();
+   public function sellerOrders(Request $request)
+{
+    $sellerId = $request->user()->id;
 
-        return response()->json([
-            'status' => true,
-            'orders' => $orders
-        ]);
-    }
+    $orders = Order::whereHas('items', function ($query) use ($sellerId) {
+                    $query->where('seller_id', $sellerId);
+                })
+                ->with(['items' => function ($query) use ($sellerId) {
+                    $query->where('seller_id', $sellerId);
+                }, 'buyer:id,name,phone'])
+                ->latest()
+                ->get();
+
+    return response()->json([
+        'status' => true,
+        'orders' => $orders
+    ]);
+}
 
     // Update order status (Seller or Admin)
-    public function updateStatus(Request $request, $id)
-    {
-        $validator = Validator::make($request->all(), [
-            'status' => 'required|in:confirmed,processing,packed,shipped,delivered,cancelled'
-        ]);
+   public function updateStatus(Request $request, $id)
+{
+    $validator = Validator::make($request->all(), [
+        'status' => 'required|in:confirmed,processing,packed,shipped,delivered,cancelled'
+    ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'status'  => false,
-                'message' => 'Validation error',
-                'errors'  => $validator->errors()
-            ], 422);
-        }
-
-        $order = Order::findOrFail($id);
-
-        // Simple permission check (can be improved later)
-        $order->update(['status' => $request->status]);
-
+    if ($validator->fails()) {
         return response()->json([
-            'status'  => true,
-            'message' => 'Order status updated successfully',
-            'order'   => $order
-        ]);
+            'status'  => false,
+            'message' => 'Validation error',
+            'errors'  => $validator->errors()
+        ], 422);
+    }
+
+    $order = Order::with('items')->findOrFail($id);
+    $sellerId = $request->user()->id;
+
+    // Check if this seller has items in the order
+    $hasItems = $order->items->where('seller_id', $sellerId)->count() > 0;
+
+    if (!$hasItems && $request->user()->role !== 'admin') {
+        return response()->json([
+            'status'  => false,
+            'message' => 'You are not authorized to update this order'
+        ], 403);
+    }
+
+    $order->update([
+        'status' => $request->status
+    ]);
+
+    return response()->json([
+        'status'  => true,
+        'message' => 'Order status updated successfully',
+        'order'   => $order
+    ]);
     }
 }
