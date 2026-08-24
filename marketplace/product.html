@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heritage Organic Beefsteak Tomatoes · AgroMarket</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="index.html" class="site-logo">
+      <div class="brand-mark"><i class="fa-solid fa-seedling"></i></div>
+      AgroMarket
+    </a>
+    <nav class="site-nav">
+      <a href="shop.html" class="active">Produce</a>
+      <a href="shop.html?type=wholesale">Wholesale</a>
+      <a href="shop.html?category=organic">Organic</a>
+      <a href="shop.html?category=seasonal">Seasonal</a>
+    </nav>
+    <div class="header-search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" placeholder="Search fresh produce…">
+    </div>
+    <div class="header-actions">
+      <a href="cart.html" class="header-icon-btn" aria-label="Cart">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="badge-count">3</span>
+      </a>
+      <button class="header-icon-btn" aria-label="Notifications"><i class="fa-solid fa-bell"></i></button>
+      <a href="account.html" class="btn btn-primary btn-sm"><i class="fa-solid fa-user"></i>Account</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <nav class="breadcrumb">
+      <a href="index.html">Home</a> / <a href="shop.html">Produce</a> / <a href="shop.html?category=vegetables">Vegetables</a> / <span>Heritage Organic Beefsteak Tomatoes</span>
+    </nav>
+
+    <div class="product-detail-grid">
+
+      <!-- Gallery -->
+      <div class="gallery">
+        <div class="gallery-main" id="gallery-main" style="background-image:url('https://images.unsplash.com/photo-1546470427-e26264be0b0d?w=800&h=800&fit=crop')"></div>
+        <div class="gallery-thumbs">
+          <button class="gallery-thumb active" data-img="https://images.unsplash.com/photo-1546470427-e26264be0b0d?w=800&h=800&fit=crop" style="background-image:url('https://images.unsplash.com/photo-1546470427-e26264be0b0d?w=150&h=150&fit=crop')"></button>
+          <button class="gallery-thumb" data-img="https://images.unsplash.com/photo-1592924738105-cf7b1c6c6a6b?w=800&h=800&fit=crop" style="background-image:url('https://images.unsplash.com/photo-1592924738105-cf7b1c6c6a6b?w=150&h=150&fit=crop')"></button>
+          <button class="gallery-thumb" data-img="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=800&h=800&fit=crop" style="background-image:url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=150&h=150&fit=crop')"></button>
+          <button class="gallery-thumb" data-img="https://images.unsplash.com/photo-1592841200221-a6898f307baa?w=800&h=800&fit=crop" style="background-image:url('https://images.unsplash.com/photo-1592841200221-a6898f307baa?w=150&h=150&fit=crop')"></button>
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div class="product-info">
+        <div class="badges">
+          <span class="badge organic">Organic</span>
+          <span class="badge verified">Farmer Verified</span>
+          <span class="badge limited">Limited</span>
+        </div>
+        <h1>Heritage Organic Beefsteak Tomatoes</h1>
+        <p class="product-lede">Sourced from Green Valley Orchards, these heirloom varieties are hand-picked at peak ripeness for unmatched flavor and juice content.</p>
+        <div class="rating-row">
+          <span class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></span>
+          <span class="text-muted">4.5 (238 ratings)</span>
+        </div>
+
+        <div class="purchase-card">
+          <div class="purchase-top">
+            <div>
+              <span class="text-muted" style="font-size:12px;">Price per lb</span>
+              <div class="purchase-price">$4.99 <span class="was-price">$6.50</span></div>
+            </div>
+            <div class="purchase-stock">
+              <span class="badge in-stock">In Stock</span>
+              <span class="text-muted" style="font-size:11.5px;">Ships from Kumasi</span>
+            </div>
+          </div>
+          <div class="purchase-actions">
+            <div class="qty-stepper">
+              <button type="button" id="qty-minus" aria-label="Decrease quantity"><i class="fa-solid fa-minus"></i></button>
+              <input type="text" id="qty-value" value="1" readonly>
+              <button type="button" id="qty-plus" aria-label="Increase quantity"><i class="fa-solid fa-plus"></i></button>
+            </div>
+            <button class="btn btn-rust btn-lg btn-block" id="add-to-cart-btn"><i class="fa-solid fa-cart-shopping"></i>Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="info-chip-row">
+          <div class="info-chip">
+            <i class="fa-solid fa-seedling"></i>
+            <div>
+              <strong>Farm Source</strong>
+              <a href="farm-profile.html">Green Valley Orchards</a>
+            </div>
+          </div>
+          <div class="info-chip">
+            <i class="fa-solid fa-leaf"></i>
+            <div>
+              <strong>Method</strong>
+              <span>Organic</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="detail-tabs">
+      <nav class="tab-nav" id="tab-nav">
+        <button class="active" data-tab="details">Product Details</button>
+        <button data-tab="journey">Farm Journey</button>
+        <button data-tab="reviews">Customer Reviews (238)</button>
+        <button data-tab="recipes">Recipes &amp; Tips</button>
+      </nav>
+
+      <section class="tab-panel active" id="tab-details">
+        <h3>The Purest Taste of Summer</h3>
+        <p>Our heirloom Beefsteak tomatoes are celebrated for their meaty texture and complex flavor. Each fruit is hand-selected at peak ripeness, grown using traditional methods perfected over generations at Green Valley Orchards.</p>
+        <ul class="detail-list">
+          <li><i class="fa-solid fa-circle-check"></i>100% pesticide-free, certified organic</li>
+          <li><i class="fa-solid fa-circle-check"></i>Sustainably grown for over 15 years</li>
+          <li><i class="fa-solid fa-circle-check"></i>Hand-harvested daily at 5am for maximum freshness</li>
+        </ul>
+      </section>
+
+      <section class="tab-panel" id="tab-journey">
+        <h3>From Field to Doorstep</h3>
+        <p>Track exactly how this batch traveled — harvested at Green Valley Orchards, quality-checked at the Kumasi transit hub, and dispatched same-day to preserve freshness.</p>
+      </section>
+
+      <section class="tab-panel" id="tab-reviews">
+        <h3>Customer Reviews</h3>
+        <div class="review-card">
+          <div class="review-avatar">JD</div>
+          <div class="review-body">
+            <div class="review-top">
+              <strong>Jonathan Doe</strong>
+              <span class="stars sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+            </div>
+            <span class="text-muted" style="font-size:12px;">Verified Purchase · 3 days ago</span>
+            <p>These are, hands down, the best tomatoes I've bought online. Rich flavor and they arrived perfectly ripe.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="tab-panel" id="tab-recipes">
+        <h3>Recipes &amp; Tips</h3>
+        <p>Best enjoyed sliced with olive oil and sea salt, or roasted whole for a rich, caramelized sauce base.</p>
+      </section>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="site-logo">
+          <div class="brand-mark"><i class="fa-solid fa-seedling"></i></div>
+          AgroMarket
+        </a>
+        <p>Connecting sustainable local farms with restaurants and wholesale buyers.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="sell.html">Farmer Partners</a></li>
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Shipping Policy</a></li>
+          <li><a href="#">Contact Support</a></li>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="../login/login.html">Wholesale Login</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Vendor Agreement</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 AgroMarket, Inc. All rights reserved.</span>
+      <span>Accra, Ghana</span>
+    </div>
+  </div>
+</footer>
+
+<button class="chat-fab" aria-label="Chat with us"><i class="fa-solid fa-comment-dots"></i></button>
+
+<div class="toast" id="toast">
+  <i class="fa-solid fa-circle-check"></i>
+  <span id="toast-text">Added to cart</span>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

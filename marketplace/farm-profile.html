@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Green Valley Orchards · AgroMarket</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="index.html" class="site-logo">
+      <div class="brand-mark"><i class="fa-solid fa-seedling"></i></div>
+      AgroMarket
+    </a>
+    <nav class="site-nav">
+      <a href="shop.html">Produce</a>
+      <a href="shop.html?type=wholesale">Wholesale</a>
+      <a href="shop.html?category=organic">Organic</a>
+      <a href="shop.html?category=seasonal">Seasonal</a>
+    </nav>
+    <div class="header-search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" placeholder="Search fresh produce…">
+    </div>
+    <div class="header-actions">
+      <a href="cart.html" class="header-icon-btn" aria-label="Cart"><i class="fa-solid fa-cart-shopping"></i><span class="badge-count">3</span></a>
+      <button class="header-icon-btn" aria-label="Notifications"><i class="fa-solid fa-bell"></i></button>
+      <a href="account.html" class="btn btn-primary btn-sm"><i class="fa-solid fa-user"></i>Account</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <div class="farm-cover" style="background-image:linear-gradient(180deg, rgba(15,30,20,0.1), rgba(10,20,15,0.5)), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1400&h=420&fit=crop')"></div>
+
+  <div class="container">
+    <div class="farm-header">
+      <div class="farm-avatar"><i class="fa-solid fa-tractor"></i></div>
+      <div class="farm-header-body">
+        <div class="farm-title-row">
+          <h1>Green Valley Orchards</h1>
+          <span class="badge verified"><i class="fa-solid fa-badge-check"></i> Verified Farm</span>
+        </div>
+        <p class="text-muted">Kumasi, Ashanti Region · Growing since 2008</p>
+        <div class="rating-row">
+          <span class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></span>
+          <span class="text-muted">4.8 (612 reviews) · 1,204 orders fulfilled</span>
+        </div>
+      </div>
+      <button class="btn btn-outline follow-btn" id="follow-btn"><i class="fa-regular fa-heart"></i>Follow Farm</button>
+    </div>
+
+    <div class="farm-stats-row">
+      <div class="farm-stat"><strong>16</strong><span>Active Listings</span></div>
+      <div class="farm-stat"><strong>15 yrs</strong><span>Farming Experience</span></div>
+      <div class="farm-stat"><strong>98%</strong><span>On-Time Delivery</span></div>
+      <div class="farm-stat"><strong>Certified</strong><span>Organic Since 2012</span></div>
+    </div>
+
+    <div class="farm-body-grid">
+      <div class="farm-main">
+        <section class="farm-section">
+          <h2>Our Story</h2>
+          <p>Green Valley Orchards has been growing heirloom vegetables and fruit on the outskirts of Kumasi since 2008. What started as a two-acre family plot has grown into a 40-acre certified organic operation, still run by the same family and the same commitment to flavor-first farming.</p>
+          <p>We believe produce tastes better when it's grown with patience — no synthetic pesticides, no rushed harvests, just healthy soil and traditional techniques passed down over three generations.</p>
+        </section>
+
+        <section class="farm-section">
+          <h2>Certifications</h2>
+          <div class="cert-row">
+            <div class="cert-chip"><i class="fa-solid fa-leaf"></i>Certified Organic</div>
+            <div class="cert-chip"><i class="fa-solid fa-droplet"></i>Sustainable Water Use</div>
+            <div class="cert-chip"><i class="fa-solid fa-hand-holding-heart"></i>Fair Trade Partner</div>
+          </div>
+        </section>
+
+        <section class="farm-section">
+          <div class="section-heading" style="margin-bottom:16px;">
+            <h2 style="font-size:20px;">Listings from this Farm</h2>
+            <a href="shop.html" class="view-all">View All <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+          <div class="product-grid cols-3">
+            <a href="product.html" class="product-card">
+              <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1546470427-e26264be0b0d?w=400&h=300&fit=crop')">
+                <div class="badges"><span class="badge organic">Organic</span></div>
+              </div>
+              <div class="body"><h3>Heritage Organic Beefsteak Tomatoes</h3><div class="price-row"><span class="price">$4.99 <span class="unit">/ lb</span></span></div></div>
+            </a>
+            <a href="product.html" class="product-card">
+              <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?w=400&h=300&fit=crop')">
+                <div class="badges"><span class="badge limited">Limited</span></div>
+              </div>
+              <div class="body"><h3>Premium Ripe Avocados</h3><div class="price-row"><span class="price">$11.00 <span class="unit">/ case</span></span></div></div>
+            </a>
+            <a href="product.html" class="product-card">
+              <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=400&h=300&fit=crop')">
+                <div class="badges"><span class="badge organic">Organic</span></div>
+              </div>
+              <div class="body"><h3>Mixed Vegetable Basket</h3><div class="price-row"><span class="price">$14.50 <span class="unit">/ basket</span></span></div></div>
+            </a>
+          </div>
+        </section>
+      </div>
+
+      <aside class="farm-sidebar">
+        <div class="farm-info-card">
+          <h4>Farm Details</h4>
+          <div class="farm-info-row"><i class="fa-solid fa-location-dot"></i><span>Kumasi, Ashanti Region</span></div>
+          <div class="farm-info-row"><i class="fa-solid fa-ruler-combined"></i><span>40 acres under cultivation</span></div>
+          <div class="farm-info-row"><i class="fa-solid fa-truck"></i><span>Ships nationwide, 24–48 hrs</span></div>
+          <div class="farm-info-row"><i class="fa-solid fa-users"></i><span>12 farm workers employed</span></div>
+        </div>
+        <div class="farm-info-card contact-card">
+          <h4>Message this Farm</h4>
+          <p>Have a bulk order or a question about this season's harvest?</p>
+          <a href="#" class="btn btn-primary btn-block"><i class="fa-solid fa-message"></i>Send Message</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="site-logo"><div class="brand-mark"><i class="fa-solid fa-seedling"></i></div>AgroMarket</a>
+        <p>Connecting sustainable local farms with restaurants and wholesale buyers.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Platform</h4><ul><li><a href="#">About Us</a></li><li><a href="sell.html">Farmer Partners</a></li><li><a href="#">Sustainability</a></li><li><a href="#">Careers</a></li></ul></div>
+      <div class="footer-col"><h4>Support</h4><ul><li><a href="#">Shipping Policy</a></li><li><a href="#">Contact Support</a></li><li><a href="#">FAQs</a></li><li><a href="../login/login.html">Wholesale Login</a></li></ul></div>
+      <div class="footer-col"><h4>Legal</h4><ul><li><a href="#">Privacy</a></li><li><a href="#">Terms of Service</a></li><li><a href="#">Vendor Agreement</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 AgroMarket, Inc. All rights reserved.</span><span>Accra, Ghana</span></div>
+  </div>
+</footer>
+
+<div class="toast" id="toast">
+  <i class="fa-solid fa-circle-check"></i>
+  <span id="toast-text">Following farm</span>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

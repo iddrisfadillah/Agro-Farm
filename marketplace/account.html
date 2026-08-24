@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Account · AgroMarket</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="index.html" class="site-logo">
+      <div class="brand-mark"><i class="fa-solid fa-seedling"></i></div>
+      AgroMarket
+    </a>
+    <nav class="site-nav">
+      <a href="shop.html">Produce</a>
+      <a href="shop.html?type=wholesale">Wholesale</a>
+      <a href="shop.html?category=organic">Organic</a>
+      <a href="shop.html?category=seasonal">Seasonal</a>
+    </nav>
+    <div class="header-search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" placeholder="Search fresh produce…">
+    </div>
+    <div class="header-actions">
+      <a href="cart.html" class="header-icon-btn" aria-label="Cart"><i class="fa-solid fa-cart-shopping"></i><span class="badge-count">3</span></a>
+      <button class="header-icon-btn" aria-label="Notifications"><i class="fa-solid fa-bell"></i></button>
+      <a href="account.html" class="btn btn-primary btn-sm active"><i class="fa-solid fa-user"></i>Account</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <nav class="breadcrumb"><a href="index.html">Home</a> / <span>My Account</span></nav>
+    <div class="page-head"><h1>My Account</h1></div>
+
+    <div class="settings-layout">
+
+      <nav class="settings-nav" id="account-nav">
+        <button class="active" data-panel="orders"><i class="fa-solid fa-receipt"></i>Order History</button>
+        <button data-panel="favorites"><i class="fa-solid fa-heart"></i>Favorites</button>
+        <button data-panel="addresses"><i class="fa-solid fa-location-dot"></i>Addresses</button>
+        <button data-panel="payment"><i class="fa-solid fa-credit-card"></i>Payment Methods</button>
+        <button data-panel="profile"><i class="fa-solid fa-user"></i>Profile</button>
+      </nav>
+
+      <div class="settings-panels">
+
+        <!-- Orders -->
+        <section class="settings-panel active" id="panel-orders">
+          <div class="card-table">
+            <table>
+              <thead><tr><th>Order</th><th>Date</th><th>Items</th><th>Total</th><th>Status</th><th></th></tr></thead>
+              <tbody>
+                <tr>
+                  <td class="mono">#AGM-48213</td>
+                  <td class="text-muted">Oct 25, 2023</td>
+                  <td>Tomatoes, Kale, Avocados</td>
+                  <td>$35.39</td>
+                  <td><span class="pill navy">Processing</span></td>
+                  <td><button class="btn btn-outline btn-sm">Track</button></td>
+                </tr>
+                <tr>
+                  <td class="mono">#AGM-48190</td>
+                  <td class="text-muted">Oct 18, 2023</td>
+                  <td>Rainbow Carrots, Eggs</td>
+                  <td>$18.20</td>
+                  <td><span class="pill green">Delivered</span></td>
+                  <td><button class="btn btn-outline btn-sm">Reorder</button></td>
+                </tr>
+                <tr>
+                  <td class="mono">#AGM-48072</td>
+                  <td class="text-muted">Oct 4, 2023</td>
+                  <td>Plantain Chips, Kale</td>
+                  <td>$9.75</td>
+                  <td><span class="pill green">Delivered</span></td>
+                  <td><button class="btn btn-outline btn-sm">Reorder</button></td>
+                </tr>
+                <tr>
+                  <td class="mono">#AGM-47950</td>
+                  <td class="text-muted">Sep 22, 2023</td>
+                  <td>Mixed Vegetable Basket</td>
+                  <td>$14.50</td>
+                  <td><span class="pill red">Cancelled</span></td>
+                  <td><button class="btn btn-outline btn-sm">Reorder</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Favorites -->
+        <section class="settings-panel" id="panel-favorites">
+          <div class="product-grid">
+            <a href="product.html" class="product-card">
+              <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1546470427-e26264be0b0d?w=400&h=300&fit=crop')">
+                <div class="badges"><span class="badge organic">Organic</span></div>
+                <button class="fav-btn active" aria-label="Remove from favorites" onclick="event.preventDefault()"><i class="fa-solid fa-heart"></i></button>
+              </div>
+              <div class="body">
+                <h3>Heritage Organic Beefsteak Tomatoes</h3>
+                <span class="farm">Green Valley Orchards</span>
+                <div class="price-row"><span class="price">$4.99 <span class="unit">/ lb</span></span></div>
+              </div>
+            </a>
+            <a href="product.html" class="product-card">
+              <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1524179091875-bf99a9a6af57?w=400&h=300&fit=crop')">
+                <div class="badges"><span class="badge organic">Organic</span></div>
+                <button class="fav-btn active" aria-label="Remove from favorites" onclick="event.preventDefault()"><i class="fa-solid fa-heart"></i></button>
+              </div>
+              <div class="body">
+                <h3>Organic Curly Kale</h3>
+                <span class="farm">Blue Hill Farms</span>
+                <div class="price-row"><span class="price">$1.99 <span class="unit">/ bunch</span></span></div>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <!-- Addresses -->
+        <section class="settings-panel" id="panel-addresses">
+          <div class="settings-card-head" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+            <h3 style="font-size:15.5px;">Saved Addresses</h3>
+            <button class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i>Add Address</button>
+          </div>
+          <div class="address-list">
+            <div class="address-card">
+              <div class="address-card-head"><strong>Home</strong><span class="badge in-stock">Default</span></div>
+              <p>12 Osu Badu Street, Osu, Accra, Greater Accra</p>
+              <div class="address-actions"><button class="btn btn-outline btn-sm">Edit</button><button class="btn btn-outline btn-sm">Remove</button></div>
+            </div>
+            <div class="address-card">
+              <div class="address-card-head"><strong>Office</strong></div>
+              <p>4th Floor, Silverstone Towers, Airport City, Accra</p>
+              <div class="address-actions"><button class="btn btn-outline btn-sm">Edit</button><button class="btn btn-outline btn-sm">Remove</button></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Payment methods -->
+        <section class="settings-panel" id="panel-payment">
+          <div class="settings-card-head" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+            <h3 style="font-size:15.5px;">Saved Payment Methods</h3>
+            <button class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i>Add Method</button>
+          </div>
+          <div class="address-list">
+            <div class="address-card">
+              <div class="address-card-head"><i class="fa-solid fa-mobile-screen" style="color:var(--green-700);"></i><strong>Mobile Money</strong><span class="badge in-stock">Default</span></div>
+              <p>MTN MoMo ending in •••• 4471</p>
+              <div class="address-actions"><button class="btn btn-outline btn-sm">Remove</button></div>
+            </div>
+            <div class="address-card">
+              <div class="address-card-head"><i class="fa-solid fa-credit-card" style="color:var(--green-700);"></i><strong>Visa Card</strong></div>
+              <p>Ending in •••• 2098 — Expires 08/27</p>
+              <div class="address-actions"><button class="btn btn-outline btn-sm">Remove</button></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Profile -->
+        <section class="settings-panel" id="panel-profile">
+          <div class="settings-card">
+            <div class="profile-head">
+              <div class="profile-avatar-lg">JD</div>
+              <div>
+                <strong style="font-size:15px;">Jane Doe</strong>
+                <div class="text-muted" style="font-size:12.5px;">Member since Jan 2023</div>
+              </div>
+            </div>
+            <div class="field-row cols-2">
+              <div class="field"><label for="acc-name">Full Name</label><input type="text" id="acc-name" value="Jane Doe"></div>
+              <div class="field"><label for="acc-email">Email Address</label><input type="email" id="acc-email" value="jane.doe@example.com"></div>
+            </div>
+            <div class="field-row cols-2">
+              <div class="field"><label for="acc-phone">Phone Number</label><input type="tel" id="acc-phone" value="+233 24 555 0192"></div>
+              <div class="field"><label for="acc-pass">Password</label><input type="password" id="acc-pass" value="••••••••"></div>
+            </div>
+            <button class="btn btn-primary" id="save-profile-btn">Save Changes</button>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom" style="border-top:1px solid var(--border); padding-top:24px;">
+      <span>© 2026 AgroMarket, Inc. All rights reserved.</span>
+      <a href="../login/login.html" style="font-weight:600; color:var(--red-500);"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</a>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast">
+  <i class="fa-solid fa-circle-check"></i>
+  <span id="toast-text">Saved</span>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

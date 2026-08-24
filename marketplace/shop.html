@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop Fresh Produce · AgroMarket</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="index.html" class="site-logo">
+      <div class="brand-mark"><i class="fa-solid fa-seedling"></i></div>
+      AgroMarket
+    </a>
+    <nav class="site-nav">
+      <a href="shop.html" class="active">Produce</a>
+      <a href="shop.html?type=wholesale">Wholesale</a>
+      <a href="shop.html?category=organic">Organic</a>
+      <a href="shop.html?category=seasonal">Seasonal</a>
+    </nav>
+    <div class="header-search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" placeholder="Search fresh produce…">
+    </div>
+    <div class="header-actions">
+      <a href="cart.html" class="header-icon-btn" aria-label="Cart">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="badge-count">3</span>
+      </a>
+      <button class="header-icon-btn" aria-label="Notifications"><i class="fa-solid fa-bell"></i></button>
+      <a href="account.html" class="btn btn-primary btn-sm"><i class="fa-solid fa-user"></i>Account</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <nav class="breadcrumb"><a href="index.html">Home</a> / <span>Shop Produce</span></nav>
+
+    <div class="page-head shop-head">
+      <div>
+        <h1>Shop Fresh Produce</h1>
+        <p class="text-muted">312 items from 84 verified farms.</p>
+      </div>
+      <div class="shop-sort">
+        <label class="text-muted" style="font-size:12.5px;">Sort by</label>
+        <select class="select-filter">
+          <option>Recommended</option>
+          <option>Price: Low to High</option>
+          <option>Price: High to Low</option>
+          <option>Newest Arrivals</option>
+          <option>Highest Rated</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="shop-layout">
+
+      <!-- Filters -->
+      <aside class="filter-panel">
+        <div class="filter-group">
+          <h4>Category</h4>
+          <label class="checkbox-row"><input type="checkbox" checked><span>Vegetables (142)</span></label>
+          <label class="checkbox-row"><input type="checkbox"><span>Fruits (98)</span></label>
+          <label class="checkbox-row"><input type="checkbox"><span>Grains &amp; Legumes (34)</span></label>
+          <label class="checkbox-row"><input type="checkbox"><span>Dairy &amp; Eggs (21)</span></label>
+          <label class="checkbox-row"><input type="checkbox"><span>Poultry &amp; Meat (17)</span></label>
+        </div>
+
+        <div class="filter-group">
+          <h4>Price Range</h4>
+          <div class="price-inputs">
+            <div class="input-affix"><span>$</span><input type="number" placeholder="0"></div>
+            <span class="text-muted">to</span>
+            <div class="input-affix"><span>$</span><input type="number" placeholder="50"></div>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h4>Farm Location</h4>
+          <select class="select-filter" style="width:100%;">
+            <option>All Regions</option>
+            <option>Ashanti</option>
+            <option>Greater Accra</option>
+            <option>Northern</option>
+            <option>Volta</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <h4>Attributes</h4>
+          <label class="checkbox-row"><input type="checkbox" checked><span>Certified Organic</span></label>
+          <label class="checkbox-row"><input type="checkbox"><span>Seasonal Pick</span></label>
+          <label class="checkbox-row"><input type="checkbox"><span>In Stock Only</span></label>
+        </div>
+
+        <button class="btn btn-outline btn-block" id="clear-filters-btn">Clear Filters</button>
+      </aside>
+
+      <!-- Results -->
+      <div class="shop-results">
+        <div class="product-grid">
+
+          <a href="product.html" class="product-card">
+            <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1546470427-e26264be0b0d?w=400&h=300&fit=crop')">
+              <div class="badges"><span class="badge organic">Organic</span></div>
+              <button class="fav-btn" aria-label="Save" onclick="event.preventDefault()"><i class="fa-regular fa-heart"></i></button>
+            </div>
+            <div class="body">
+              <h3>Heritage Organic Beefsteak Tomatoes</h3>
+              <span class="farm">Green Valley Orchards</span>
+              <div class="price-row">
+                <span class="price">$4.99 <span class="unit">/ lb</span></span>
+                <button class="add-btn" aria-label="Add to cart" data-add-to-cart onclick="event.preventDefault()"><i class="fa-solid fa-plus"></i></button>
+              </div>
+            </div>
+          </a>
+
+          <a href="product.html" class="product-card">
+            <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1447175008436-054170c2e979?w=400&h=300&fit=crop')">
+              <div class="badges"><span class="badge organic">Organic</span><span class="badge new">New</span></div>
+              <button class="fav-btn" aria-label="Save" onclick="event.preventDefault()"><i class="fa-regular fa-heart"></i></button>
+            </div>
+            <div class="body">
+              <h3>Heirloom Rainbow Carrots</h3>
+              <span class="farm">Earth Valley Gardens</span>
+              <div class="price-row">
+                <span class="price">$4.00 <span class="unit">/ bundle</span></span>
+                <button class="add-btn" aria-label="Add to cart" data-add-to-cart onclick="event.preventDefault()"><i class="fa-solid fa-plus"></i></button>
+              </div>
+            </div>
+          </a>
+
+          <a href="product.html" class="product-card">
+            <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?w=400&h=300&fit=crop')">
+              <div class="badges"><span class="badge limited">Limited</span></div>
+              <button class="fav-btn" aria-label="Save" onclick="event.preventDefault()"><i class="fa-regular fa-heart"></i></button>
+            </div>
+            <div class="body">
+              <h3>Premium Ripe Avocados</h3>
+              <span class="farm">Green Valley Orchards</span>
+              <div class="price-row">
+                <span class="price">$11.00 <span class="unit">/ case</span></span>
+                <button class="add-btn" aria-label="Add to cart" data-add-to-cart onclick="event.preventDefault()"><i class="fa-solid fa-plus"></i></button>
+              </div>
+            </div>
+          </a>
+
+          <a href="product.html" class="product-card">
+            <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1524179091875-bf99a9a6af57?w=400&h=300&fit=crop')">
+              <div class="badges"><span class="badge organic">Organic</span><span class="badge seasonal">Seasonal</span></div>
+              <button class="fav-btn" aria-label="Save" onclick="event.preventDefault()"><i class="fa-regular fa-heart"></i></button>
+            </div>
+            <div class="body">
+              <h3>Organic Curly Kale</h3>
+              <span class="farm">Blue Hill Farms</span>
+              <div class="price-row">
+                <span class="price">$1.99 <span class="unit">/ bunch</span></span>
+                <button class="add-btn" aria-label="Add to cart" data-add-to-cart onclick="event.preventDefault()"><i class="fa-solid fa-plus"></i></button>
+              </div>
+            </div>
+          </a>
+
+          <a href="product.html" class="product-card">
+            <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1594282486552-05b4d80fbb9f?w=400&h=300&fit=crop')">
+              <div class="badges"><span class="badge organic">Organic</span></div>
+              <button class="fav-btn" aria-label="Save" onclick="event.preventDefault()"><i class="fa-regular fa-heart"></i></button>
+            </div>
+            <div class="body">
+              <h3>Free-Range Eggs (Crate)</h3>
+              <span class="farm">Nana Yaw Poultry</span>
+              <div class="price-row">
+                <span class="price">$8.50 <span class="unit">/ crate</span></span>
+                <button class="add-btn" aria-label="Add to cart" data-add-to-cart onclick="event.preventDefault()"><i class="fa-solid fa-plus"></i></button>
+              </div>
+            </div>
+          </a>
+
+          <a href="product.html" class="product-card">
+            <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1587049633312-d628ae50a8ae?w=400&h=300&fit=crop')">
+              <div class="badges"><span class="badge new">New</span></div>
+              <button class="fav-btn" aria-label="Save" onclick="event.preventDefault()"><i class="fa-regular fa-heart"></i></button>
+            </div>
+            <div class="body">
+              <h3>Sun-Dried Plantain Chips</h3>
+              <span class="farm">Ama Serwaa Co-op</span>
+              <div class="price-row">
+                <span class="price">$2.80 <span class="unit">/ pack</span></span>
+                <button class="add-btn" aria-label="Add to cart" data-add-to-cart onclick="event.preventDefault()"><i class="fa-solid fa-plus"></i></button>
+              </div>
+            </div>
+          </a>
+
+          <a href="product.html" class="product-card">
+            <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=400&h=300&fit=crop')">
+              <div class="badges"><span class="badge organic">Organic</span></div>
+              <button class="fav-btn" aria-label="Save" onclick="event.preventDefault()"><i class="fa-regular fa-heart"></i></button>
+            </div>
+            <div class="body">
+              <h3>Mixed Vegetable Basket</h3>
+              <span class="farm">Sunridge Acres</span>
+              <div class="price-row">
+                <span class="price">$14.50 <span class="unit">/ basket</span></span>
+                <button class="add-btn" aria-label="Add to cart" data-add-to-cart onclick="event.preventDefault()"><i class="fa-solid fa-plus"></i></button>
+              </div>
+            </div>
+          </a>
+
+          <a href="product.html" class="product-card">
+            <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1519996529931-28324d5a630e?w=400&h=300&fit=crop')">
+              <div class="badges"><span class="badge seasonal">Seasonal</span></div>
+              <button class="fav-btn" aria-label="Save" onclick="event.preventDefault()"><i class="fa-regular fa-heart"></i></button>
+            </div>
+            <div class="body">
+              <h3>Mixed Berry Punnet</h3>
+              <span class="farm">Blue Hill Farms</span>
+              <div class="price-row">
+                <span class="price">$6.20 <span class="unit">/ punnet</span></span>
+                <button class="add-btn" aria-label="Add to cart" data-add-to-cart onclick="event.preventDefault()"><i class="fa-solid fa-plus"></i></button>
+              </div>
+            </div>
+          </a>
+
+        </div>
+
+        <div class="shop-pagination">
+          <button class="page-btn" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+          <button class="page-btn active">1</button>
+          <button class="page-btn">2</button>
+          <button class="page-btn">3</button>
+          <span class="text-muted">…</span>
+          <button class="page-btn">39</button>
+          <button class="page-btn" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="site-logo">
+          <div class="brand-mark"><i class="fa-solid fa-seedling"></i></div>
+          AgroMarket
+        </a>
+        <p>Connecting sustainable local farms with restaurants and wholesale buyers.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="sell.html">Farmer Partners</a></li>
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Shipping Policy</a></li>
+          <li><a href="#">Contact Support</a></li>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="../login/login.html">Wholesale Login</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Vendor Agreement</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 AgroMarket, Inc. All rights reserved.</span>
+      <span>Accra, Ghana</span>
+    </div>
+  </div>
+</footer>
+
+<button class="chat-fab" aria-label="Chat with us"><i class="fa-solid fa-comment-dots"></i></button>
+
+<div class="toast" id="toast">
+  <i class="fa-solid fa-circle-check"></i>
+  <span id="toast-text">Added to cart</span>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
