@@ -10,6 +10,8 @@ use App\Http\Controllers\Api\ReviewController;
 use App\Http\Controllers\Api\SellerDashboardController;
 use App\Http\Controllers\Api\ChatController;
 
+use App\Http\Controllers\Api\AdminController;
+
 // ====================== AUTH ROUTES ======================
 Route::prefix('auth')->group(function () {
 
@@ -53,12 +55,21 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 // ====================== CART ROUTES ======================
-Route::middleware('auth:sanctum')->prefix('cart')->group(function () {
-    Route::get('/', [CartController::class, 'index']);
-    Route::post('/', [CartController::class, 'store']);
-    Route::put('/{itemId}', [CartController::class, 'update']);
-    Route::delete('/{itemId}', [CartController::class, 'destroy']);
-    Route::delete('/', [CartController::class, 'clear']);
+// Route::middleware('auth:sanctum')->prefix('cart')->group(function () {
+
+Route::middleware('auth:sanctum')->group(function () {
+    // Route::get('/', [CartController::class, 'index']);
+    // Route::post('/', [CartController::class, 'store']);
+    // Route::put('/{itemId}', [CartController::class, 'update']);
+    // Route::delete('/{itemId}', [CartController::class, 'destroy']);
+    // Route::delete('/', [CartController::class, 'clear']);
+
+
+    // Cart routes
+    Route::get('/cart', [CartController::class, 'index']);
+    Route::post('/cart', [CartController::class, 'store']);
+    Route::put('/cart/items/{id}', [CartController::class, 'update']);
+    Route::delete('/cart/items/{id}', [CartController::class, 'destroy']);
 });
 
 // ====================== ORDER ROUTES ======================
@@ -79,6 +90,13 @@ Route::middleware('auth:sanctum')->group(function () {
 // ====================== SELLER DASHBOARD ROUTES ======================
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/seller/dashboard', [SellerDashboardController::class, 'index']);
+
+
+    // Seller product management
+Route::get('/my-products', [ProductController::class, 'myProducts']);
+Route::get('/my-products/{id}', [ProductController::class, 'showMyProduct']);
+Route::put('/my-products/{id}', [ProductController::class, 'update']);
+Route::delete('/my-products/{id}', [ProductController::class, 'destroy']);
 });
 
 // ====================== CHAT ROUTES ======================
@@ -87,4 +105,22 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/chat/conversations/{id}/messages', [ChatController::class, 'messages']);
     Route::post('/chat/start', [ChatController::class, 'start']);
     Route::post('/chat/conversations/{id}/send', [ChatController::class, 'send']);
+});
+
+
+
+
+Route::middleware('auth:sanctum')->group(function () {
+
+    // Existing routes...
+
+    // Admin routes
+    Route::prefix('admin')->group(function () {
+        Route::get('/dashboard', [AdminController::class, 'dashboard']);
+        Route::get('/users', [AdminController::class, 'users']);
+        Route::post('/users/{id}/verify', [AdminController::class, 'verifySeller']);
+        Route::put('/users/{id}/role', [AdminController::class, 'updateUserRole']);
+        Route::get('/orders', [AdminController::class, 'orders']);
+        Route::post('/orders/{id}/status', [AdminController::class, 'updateOrderStatus']);
+    });
 });

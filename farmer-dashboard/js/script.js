@@ -453,9 +453,9 @@ function renderProducts(products) {
             ${product.quantity_available} ${product.unit} available
           </div>
           <div class="actions">
-            <button class="btn btn-outline">View</button>
-            <button class="btn btn-outline">Edit</button>
-          </div>
+           <button class="btn btn-outline" onclick="viewProduct(${product.id})">View</button>
+            <button class="btn btn-outline" onclick="editProduct(${product.id})">Edit</button>
+            </div>
         </div>
       </div>
     `;
@@ -796,4 +796,148 @@ function initChatForm() {
       showToast('Network error');
     }
   });
+}
+
+
+/* ---------- View / Edit Product ---------- */
+
+async function viewProduct(id) {
+  const token = localStorage.getItem('token');
+
+  try {
+    const res = await fetch(`${API_BASE}/my-products/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json'
+      }
+    });
+
+    const data = await res.json();
+
+    if (!data.status || !data.product) {
+      showToast(data.message || 'Product not found');
+      return;
+    }
+
+    if (data.product.status !== 'approved') {
+      showToast('This product is still pending admin approval. It cannot be viewed publicly yet.');
+      return;
+    }
+
+    // Open public product page
+    window.open(`../marketplace/product.html?id=${id}`, '_blank');
+
+  } catch (error) {
+    console.error(error);
+    showToast('Network error');
+  }
+}
+
+async function editProduct(id) {
+  const token = localStorage.getItem('token');
+
+  try {
+    const res = await fetch(`${API_BASE}/my-products/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json'
+      }
+    });
+
+    const data = await res.json();
+
+    if (!data.status) {
+      showToast(data.message || 'Failed to load product');
+      return;
+    }
+
+    // Store product temporarily and redirect to edit page
+    // For now we'll use a simple prompt-based update (quick version)
+    // Later we can build a full edit form page
+
+    openEditModal(data.product);
+
+  } catch (error) {
+    console.error(error);
+    showToast('Network error');
+  }
+}
+
+function openEditModal(product) {
+  const newName = prompt('Product Name:', product.name);
+  if (newName === null) return;
+
+  const newPrice = prompt('Price:', product.price);
+  if (newPrice === null) return;
+
+  const newQty = prompt('Quantity Available:', product.quantity_available);
+  if (newQty === null) return;
+
+  updateProduct(product.id, {
+    name: newName,
+    price: newPrice,
+    quantity_available: newQty
+  });
+}
+
+async function updateProduct(id, payload) {
+  const token = localStorage.getItem('token');
+
+  try {
+    const res = await fetch(`${API_BASE}/my-products/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await res.json();
+
+    if (data.status) {
+      showToast('Product updated successfully');
+      // Refresh the product list
+      if (typeof loadMyProducts === 'function') {
+        loadMyProducts();
+      } else if (typeof loadSellerDashboard === 'function') {
+        loadSellerDashboard();
+      }
+    } else {
+      showToast(data.message || 'Failed to update product');
+    }
+  } catch (error) {
+    console.error(error);
+    showToast('Network error');
+  }
+}
+
+async function deleteProduct(id) {
+  if (!confirm('Are you sure you want to delete this product?')) return;
+
+  const token = localStorage.getItem('token');
+
+  try {
+    const res = await fetch(`${API_BASE}/my-products/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json'
+      }
+    });
+
+    const data = await res.json();
+
+    if (data.status) {
+      showToast('Product deleted');
+      if (typeof loadMyProducts === 'function') {
+        loadMyProducts();
+      }
+    } else {
+      showToast(data.message || 'Failed to delete');
+    }
+  } catch (error) {
+    showToast('Network error');
+  }
 }

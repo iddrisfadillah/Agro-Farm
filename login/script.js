@@ -96,6 +96,17 @@ const phoneInput = document.getElementById('phone') || document.getElementById('
 
       showToast('Signed in successfully');
       
+        // Redirect based on role
+       setTimeout(() => {
+        if (data.user.role === 'seller') {
+      window.location.href = '../farmer-dashboard/index.html';
+      } else if (data.user.role === 'admin') {
+      window.location.href = '../admin-dashboard/index.html';
+      } else {
+      // Buyer
+      window.location.href = '../marketplace/shop.html';
+      }
+       }, 1000);
 
       // Optional: Redirect after login
           // window.location.href = 'index.html';
@@ -234,14 +245,17 @@ if (otpForm) {
 
         showToast('Phone verified successfully!');
 
-        // Redirect based on role
+       // Redirect based on role
         setTimeout(() => {
        if (data.user.role === 'seller') {
-        window.location.href = '../farmer-dashboard/index.html';
-       } else {
-        window.location.href = '/index.html';
-        }
-       }, 1200);
+         window.location.href = '../farmer-dashboard/index.html';
+        } else if (data.user.role === 'admin') {
+         window.location.href = '../admin-dashboard/index.html';
+      } else {
+         // Buyer
+         window.location.href = '../marketplace/shop.html';
+         }
+          }, 1200);
 
       } else {
         showToast(data.message || 'Invalid or expired OTP');

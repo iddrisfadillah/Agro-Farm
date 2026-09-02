@@ -20,9 +20,10 @@ class ProductController extends Controller
                         ->where('is_active', true);
 
         // 1. Search by name
-        if ($request->filled('search')) {
-            $query->where('name', 'like', '%' . $request->search . '%');
-        }
+        if ($request->search) {
+         $query->where('name', 'like', '%' . $request->search . '%')
+          ->orWhere('description', 'like', '%' . $request->search . '%');
+        }       
 
         // 2. Filter by Category
         if ($request->filled('category_id')) {
@@ -82,13 +83,22 @@ class ProductController extends Controller
     // Public: Single product details
     public function show($id)
     {
-        $product = Product::with(['seller:id,name,phone,farm_latitude,farm_longitude,bio', 'category', 'images'])
-                          ->where('status', 'approved')
-                          ->findOrFail($id);
+        $product = Product::with(['images', 'category', 'seller:id,name,phone'])
+        ->where('id', $id)
+        ->where('status', 'approved')
+        ->where('is_active', true)
+        ->first();
+
+        if (!$product) {
+        return response()->json([
+            'status' => false,
+            'message' => 'Product not found or not yet approved'
+            ], 404);
+        }
 
         return response()->json([
-            'status' => true,
-            'product' => $product
+        'status' => true,
+        'product' => $product
         ]);
     }
 
@@ -259,5 +269,98 @@ class ProductController extends Controller
             'product' => $product
         ]);
     }
+
+    // Show one of the seller's own products
+public function showMyProduct(Request $request, $id)
+{
+    $product = Product::with(['images', 'category'])
+        ->where('id', $id)
+        ->where('user_id', $request->user()->id)
+        ->first();
+
+    if (!$product) {
+        return response()->json([
+            'status' => false,
+            'message' => 'Product not found'
+        ], 404);
+    }
+
+    return response()->json([
+        'status' => true,
+        'product' => $product
+    ]);
+}
+
+// Update product
+public function update(Request $request, $id)
+{
+    $product = Product::where('id', $id)
+        ->where('user_id', $request->user()->id)
+        ->first();
+
+    if (!$product) {
+        return response()->json([
+            'status' => false,
+            'message' => 'Product not found'
+        ], 404);
+    }
+
+    $validator = Validator::make($request->all(), [
+        'name'               => 'sometimes|string|max:255',
+        'category_id'        => 'sometimes|exists:categories,id',
+        'description'        => 'nullable|string',
+        'price'              => 'sometimes|numeric|min:0',
+        'unit'               => 'sometimes|string|max:50',
+        'quantity_available' => 'sometimes|numeric|min:0',
+        'harvest_date'       => 'nullable|date',
+        'certification'      => 'nullable|string|max:100',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+            'status' => false,
+            'message' => 'Validation error',
+            'errors' => $validator->errors()
+        ], 422);
+    }
+
+    $product->update($request->only([
+        'name', 'category_id', 'description', 'price',
+        'unit', 'quantity_available', 'harvest_date', 'certification'
+    ]));
+
+    // If product was previously rejected, set it back to pending
+    if ($product->status === 'rejected') {
+        $product->update(['status' => 'pending', 'rejection_reason' => null]);
+    }
+
+    return response()->json([
+        'status'  => true,
+        'message' => 'Product updated successfully',
+        'product' => $product->load(['images', 'category'])
+    ]);
+}
+
+// Delete product
+public function destroy(Request $request, $id)
+{
+    $product = Product::where('id', $id)
+        ->where('user_id', $request->user()->id)
+        ->first();
+
+    if (!$product) {
+        return response()->json([
+            'status' => false,
+            'message' => 'Product not found'
+        ], 404);
+    }
+
+    $product->delete();
+
+    return response()->json([
+        'status'  => true,
+        'message' => 'Product deleted successfully'
+    ]);
+}
 
 }

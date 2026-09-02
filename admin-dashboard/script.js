@@ -1,12 +1,38 @@
 // ===================== AgroMarket — Admin Portal Script =====================
 // Used only by: admin-dashboard/*.html
-
+const API_BASE = 'http://127.0.0.1:8000/api';
 document.addEventListener('DOMContentLoaded', () => {
   initActivityTabs();
   initModerationActions();
   initUserManagementTable();
   initRefreshButton();
   initSettingsPage();
+
+  // Only run on product moderation page
+  if (document.getElementById('moderation-tbody')) {
+    loadPendingProducts();
+  }
+
+  // Refresh button
+  // const refreshBtn = document.getElementById('refresh-btn');
+  // if (refreshBtn) {
+  //   refreshBtn.addEventListener('click', loadPendingProducts);
+  // }
+  // Product Moderation page
+  if (document.getElementById('moderation-tbody')) {
+    loadPendingProducts();
+  }
+
+  // Admin Dashboard homepage
+  if (document.querySelector('.stats-row')) {
+    loadAdminDashboard();
+  }
+
+  // Refresh button on moderation page
+  const refreshBtn = document.getElementById('refresh-btn');
+  if (refreshBtn) {
+    refreshBtn.addEventListener('click', loadPendingProducts);
+  }
 });
 
 /* ---------- Toast ---------- */
@@ -19,6 +45,173 @@ function showToast(message) {
   clearTimeout(showToast._t);
   showToast._t = setTimeout(() => toast.classList.remove('show'), 2600);
 }
+
+  //risky
+  async function loadPendingProducts() {
+  const token = localStorage.getItem('token');
+
+  if (!token) {
+    showToast('Please log in as Admin');
+    setTimeout(() => {
+      window.location.href = '../login/login.html';
+    }, 1200);
+    return;
+  }
+
+  try {
+    const res = await fetch(`${API_BASE}/admin/products/pending`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json'
+      }
+    });
+
+    const data = await res.json();
+
+    if (!data.status) {
+      showToast(data.message || 'Failed to load products');
+      return;
+    }
+
+    renderPendingProducts(data.products || []);
+  } catch (error) {
+    console.error(error);
+    showToast('Network error');
+  }
+}
+
+function renderPendingProducts(products) {
+  const tbody = document.getElementById('moderation-tbody');
+  const emptyState = document.getElementById('empty-state');
+  const countLabel = document.getElementById('count-label');
+
+  if (!tbody) return;
+
+  if (products.length === 0) {
+    tbody.innerHTML = '';
+    if (emptyState) emptyState.style.display = 'block';
+    if (countLabel) countLabel.textContent = 'No pending listings';
+    return;
+  }
+
+  if (emptyState) emptyState.style.display = 'none';
+
+  tbody.innerHTML = products.map(product => {
+    const image = product.images?.[0]?.image_path
+      ? `http://127.0.0.1:8000/storage/${product.images[0].image_path}`
+      : 'https://via.placeholder.com/100';
+
+    const farmerName = product.user?.name || 'Unknown Farmer';
+    const category = product.category?.name || 'Uncategorized';
+
+    return `
+      <tr data-id="${product.id}">
+        <td>
+          <div class="product-cell">
+            <div class="product-thumb" style="background-image:url('${image}')"></div>
+            <div class="product-cell-body">
+              <strong>${product.name}</strong>
+              <span>ID: ${product.id}</span>
+            </div>
+          </div>
+        </td>
+        <td>${farmerName}</td>
+        <td><span class="pill gray">${category}</span></td>
+        <td>${Number(product.price).toFixed(2)} / ${product.unit}</td>
+        <td><span class="pill blue">Pending Review</span></td>
+        <td class="row-actions">
+          <button class="icon-btn-sm" aria-label="View details" onclick="viewProduct(${product.id})">
+            <i class="fa-solid fa-eye"></i>
+          </button>
+          <button class="icon-btn-sm approve" aria-label="Approve" onclick="approveProduct(${product.id})">
+            <i class="fa-solid fa-check"></i>
+          </button>
+          <button class="icon-btn-sm reject" aria-label="Reject" onclick="rejectProduct(${product.id})">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+
+  if (countLabel) {
+    countLabel.textContent = `Showing ${products.length} pending listing${products.length !== 1 ? 's' : ''}`;
+  }
+}
+
+async function approveProduct(id) {
+  const token = localStorage.getItem('token');
+
+  try {
+    const res = await fetch(`${API_BASE}/admin/products/${id}/approve`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json'
+      }
+    });
+
+    const data = await res.json();
+
+    if (data.status) {
+      showToast('Product approved successfully');
+      loadPendingProducts(); // refresh list
+    } else {
+      showToast(data.message || 'Failed to approve');
+    }
+  } catch (error) {
+    showToast('Network error');
+  }
+}
+
+async function rejectProduct(id) {
+  const reason = prompt('Enter rejection reason (optional):') || 'Does not meet quality standards';
+  const token = localStorage.getItem('token');
+
+  try {
+    const res = await fetch(`${API_BASE}/admin/products/${id}/reject`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({ rejection_reason: reason })
+    });
+
+    const data = await res.json();
+
+    if (data.status) {
+      showToast('Product rejected');
+      loadPendingProducts();
+    } else {
+      showToast(data.message || 'Failed to reject');
+    }
+  } catch (error) {
+    showToast('Network error');
+  }
+}
+
+function viewProduct(id) {
+  // Simple view for now
+  window.open(`../marketplace/product.html?id=${id}`, '_blank');
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* ---------- Dashboard: activity chart tabs ---------- */
 
@@ -174,4 +367,62 @@ function initUserManagementTable() {
       updateCount();
     }
   });
+}
+
+/* ---------- Admin Dashboard Stats ---------- */
+async function loadAdminDashboard() {
+  const token = localStorage.getItem('token');
+
+  if (!token) {
+    showToast('Please log in as Admin');
+    setTimeout(() => {
+      window.location.href = '../login/login.html';
+    }, 1200);
+    return;
+  }
+
+  try {
+    const res = await fetch(`${API_BASE}/admin/dashboard`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json'
+      }
+    });
+
+    const data = await res.json();
+
+    if (!data.status) {
+      showToast(data.message || 'Failed to load dashboard');
+      return;
+    }
+
+    renderDashboardStats(data.stats);
+  } catch (error) {
+    console.error(error);
+    showToast('Network error');
+  }
+}
+
+function renderDashboardStats(stats) {
+  const cards = document.querySelectorAll('.stat-card');
+
+  if (cards.length < 4) return;
+
+  // Card 1: Total Revenue
+  cards[0].querySelector('.stat-value').textContent =
+    `GH₵ ${Number(stats.total_revenue || 0).toLocaleString()}`;
+
+  // Card 2: Active Users
+  cards[1].querySelector('.stat-value').textContent =
+    Number(stats.total_users || 0).toLocaleString();
+
+  // Card 3: Pending Tasks (pending products + pending sellers)
+  const pendingTasks = (stats.pending_products || 0) + (stats.pending_sellers || 0);
+  cards[2].querySelector('.stat-value').textContent = pendingTasks;
+  cards[2].querySelector('.stat-sub').innerHTML =
+    `<i class="fa-solid fa-circle-exclamation"></i> ${stats.pending_products || 0} products pending review`;
+
+  // Card 4: Active Listings (approved products)
+  cards[3].querySelector('.stat-value').textContent =
+    Number(stats.approved_products || 0).toLocaleString();
 }
