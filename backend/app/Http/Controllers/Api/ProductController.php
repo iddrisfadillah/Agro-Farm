@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Storage;
 class ProductController extends Controller
 {
         // Public: List approved products (with search, filters & sorting)
-    public function index(Request $request)
-    {
+        public function index(Request $request)
+        {
         $query = Product::with(['seller:id,name,phone', 'category:id,name', 'images'])
                         ->where('status', 'approved')
                         ->where('is_active', true);

@@ -5,7 +5,7 @@ const API_BASE = 'http://127.0.0.1:8000/api';
 
 
 document.addEventListener('DOMContentLoaded', () => {
-  loadProducts();
+  // loadProducts();
   initAddToCart();
   initFavoriteButtons();
   initGallery();
@@ -17,6 +17,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initSettingsNav();
   initFollowButton();
   initProductSearch();
+
+  initCategoryFromURL();
+  initProductSearch();
+  initAccountPage();
 
   // Cart page
   if (document.getElementById('cart-items')) {
@@ -293,10 +297,12 @@ function initFollowButton() {
 async function loadProducts(filters = {}) {
   try {
     const params = new URLSearchParams();
-
-    if (filters.search) {
-      params.append('search', filters.search);
-    }
+    if (filters.search) params.append('search', filters.search);
+    if (filters.category_id) params.append('category_id', filters.category_id);
+    if (filters.certification) params.append('certification', filters.certification);
+    if (filters.min_price) params.append('min_price', filters.min_price);
+    if (filters.max_price) params.append('max_price', filters.max_price);
+    if (filters.sort) params.append('sort', filters.sort);
 
 
     const res = await fetch(`${API_BASE}/products?${params}`);
@@ -885,5 +891,194 @@ function initProductSearch() {
       const keyword = e.target.value.trim();
       loadProducts({ search: keyword });
     }, 400); // wait 400ms after user stops typing
+  });
+}
+
+
+
+
+
+function initCategoryFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  const categoryId = params.get('category_id');
+  const category = params.get('category');
+  const type = params.get('type');
+
+  // Highlight the active nav link
+  highlightActiveNav(category, type);
+
+  if (categoryId) {
+    loadProducts({ category_id: categoryId });
+  } else if (category === 'organic') {
+    loadProducts({ certification: 'Organic' });
+  } else if (category === 'seasonal') {
+    // For now: show newest products (you can improve later)
+    loadProducts({ sort: 'newest' });
+  } else if (type === 'wholesale') {
+    // Optional: only products with higher stock
+    loadProducts({ sort: 'newest' });
+  } else {
+    loadProducts(); // all produce
+  }
+}
+
+function highlightActiveNav(category, type) {
+  const links = document.querySelectorAll('.site-nav a');
+  links.forEach(link => link.classList.remove('active'));
+
+  if (category === 'organic') {
+    document.querySelector('.site-nav a[data-filter="organic"]')?.classList.add('active');
+  } else if (category === 'seasonal') {
+    document.querySelector('.site-nav a[data-filter="seasonal"]')?.classList.add('active');
+  } else if (type === 'wholesale') {
+    document.querySelector('.site-nav a[data-filter="wholesale"]')?.classList.add('active');
+  } else {
+    document.querySelector('.site-nav a[data-filter="all"]')?.classList.add('active');
+  }
+}
+
+/* ---------- Account: Order History ---------- */
+async function loadBuyerOrders() {
+  const token = localStorage.getItem('token');
+
+  if (!token) {
+    showToast('Please log in');
+    setTimeout(() => {
+      window.location.href = '../login/login.html';
+    }, 1200);
+    return;
+  }
+
+  try {
+    const res = await fetch(`${API_BASE}/orders`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json'
+      }
+    });
+
+    const data = await res.json();
+
+    if (!data.status) {
+      showToast(data.message || 'Failed to load orders');
+      return;
+    }
+
+    const orders = data.orders?.data || data.orders || [];
+    renderBuyerOrders(orders);
+  } catch (error) {
+    console.error(error);
+    showToast('Network error');
+  }
+}
+
+function renderBuyerOrders(orders) {
+  const tbody = document.querySelector('#panel-orders tbody');
+  if (!tbody) return;
+
+  if (orders.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="6" style="text-align:center; padding:40px; color:#777;">
+          No orders yet. <a href="shop.html">Start shopping</a>
+        </td>
+      </tr>
+    `;
+    return;
+  }
+
+  tbody.innerHTML = orders.map(order => {
+    const date = order.created_at
+      ? new Date(order.created_at).toLocaleDateString('en-GB', {
+          day: 'numeric',
+          month: 'short',
+          year: 'numeric'
+        })
+      : '—';
+
+    const items = (order.items || [])
+      .map(i => i.product_name)
+      .join(', ') || '—';
+
+    const total = Number(order.total || 0).toFixed(2);
+    const status = (order.status || 'pending').toLowerCase();
+
+    let statusClass = 'navy';
+    if (status === 'delivered' || status === 'shipped') statusClass = 'green';
+    if (status === 'cancelled') statusClass = 'red';
+
+    const actionLabel = (status === 'delivered' || status === 'cancelled')
+      ? 'Reorder'
+      : 'Track';
+
+    return `
+      <tr>
+        <td class="mono">#${order.order_number || order.id}</td>
+        <td class="text-muted">${date}</td>
+        <td>${items}</td>
+        <td>$${total}</td>
+        <td><span class="pill ${statusClass}">${status}</span></td>
+        <td>
+          <button class="btn btn-outline btn-sm" onclick="viewBuyerOrder(${order.id})">
+            ${actionLabel}
+          </button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
+
+function viewBuyerOrder(id) {
+  // Simple for now — show toast with order id
+  showToast(`Order #${id} details coming soon`);
+}
+
+function initAccountPage() {
+  if (!window.location.pathname.includes('account')) return;
+
+  // Panel switching
+  const nav = document.getElementById('account-nav');
+  if (nav) {
+    nav.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        nav.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        document.querySelectorAll('.settings-panel').forEach(p => p.classList.remove('active'));
+        const panel = document.getElementById(`panel-${btn.dataset.panel}`);
+        if (panel) panel.classList.add('active');
+      });
+    });
+  }
+
+  // Load orders
+  loadBuyerOrders();
+
+  // Load profile
+  const user = JSON.parse(localStorage.getItem('user') || 'null');
+  if (user) {
+    const nameInput = document.getElementById('acc-name');
+    const emailInput = document.getElementById('acc-email');
+    const phoneInput = document.getElementById('acc-phone');
+
+    if (nameInput) nameInput.value = user.name || '';
+    if (emailInput) emailInput.value = user.email || '';
+    if (phoneInput) phoneInput.value = user.phone || '';
+
+    const avatar = document.querySelector('#panel-profile .profile-avatar-lg');
+    if (avatar && user.name) {
+      avatar.textContent = user.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+    }
+
+    const profileName = document.querySelector('#panel-profile .profile-head strong');
+    if (profileName) profileName.textContent = user.name || '';
+  }
+
+  // Sign out
+  document.querySelectorAll('a[href="../login/login.html"]').forEach(link => {
+    link.addEventListener('click', () => {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+    });
   });
 }

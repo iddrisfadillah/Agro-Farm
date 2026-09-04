@@ -453,9 +453,10 @@ function renderProducts(products) {
             ${product.quantity_available} ${product.unit} available
           </div>
           <div class="actions">
-           <button class="btn btn-outline" onclick="viewProduct(${product.id})">View</button>
-            <button class="btn btn-outline" onclick="editProduct(${product.id})">Edit</button>
-            </div>
+          <button class="btn btn-outline" onclick="viewProduct(${product.id})">View</button>
+          <button class="btn btn-outline" onclick="editProduct(${product.id})">Edit</button>
+          <button class="btn btn-outline" style="color:#c0392b;" onclick="deleteProduct(${product.id})">Delete</button>
+          </div>
         </div>
       </div>
     `;
@@ -930,14 +931,20 @@ async function deleteProduct(id) {
     const data = await res.json();
 
     if (data.status) {
-      showToast('Product deleted');
+      showToast('Product deleted successfully');
+      // Refresh product list
       if (typeof loadMyProducts === 'function') {
         loadMyProducts();
+      } else if (typeof loadSellerDashboard === 'function') {
+        loadSellerDashboard();
+      } else {
+        location.reload();
       }
     } else {
-      showToast(data.message || 'Failed to delete');
+      showToast(data.message || 'Failed to delete product');
     }
   } catch (error) {
+    console.error(error);
     showToast('Network error');
   }
 }

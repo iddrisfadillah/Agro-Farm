@@ -129,7 +129,7 @@ class AdminController extends Controller
     // ====================== GLOBAL ORDERS ======================
     public function orders(Request $request)
     {
-        $query = Order::with(['user:id,name,phone', 'items']);
+        $query = Order::with(['buyer:id,name,phone', 'items']);
 
         if ($request->status) {
             $query->where('status', $request->status);
