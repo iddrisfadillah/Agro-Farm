@@ -20,6 +20,11 @@ function showToast(message) {
   showToast._t = setTimeout(() => toast.classList.remove('show'), 2600);
 }
 
+/* ---------- Phone validation ---------- */
+function isValidPhone(phone) {
+  return /^0[0-9]{9}$/.test(phone);
+}
+
 /* ---------- Password show/hide ---------- */
 
 function initPasswordReveal() {
@@ -67,6 +72,12 @@ function initAuthForms() {
       // TODO: replace with a real authentication API call
 const phoneInput = document.getElementById('phone') || document.getElementById('email');
       const phone = phoneInput ? phoneInput.value.trim() : '';
+      if (phone.startsWith('0') && !isValidPhone(phone)) {
+        showToast('Phone must start with 0 and be exactly 10 digits');
+        return;
+        }
+
+
       const password = document.getElementById('password')?.value || '';
 
       if (!phone || !password) {
@@ -141,6 +152,12 @@ if (signupForm) {
     if (pass !== confirm) {
       showToast("Passwords don't match");
       return;
+    }
+    // Phone validation — ADD HERE
+    const phone = document.getElementById('phone').value.trim();
+    if (!isValidPhone(phone)) {
+    showToast('Phone must start with 0 and be exactly 10 digits');
+    return;
     }
 
     // Get selected role (convert "farmer" → "seller")

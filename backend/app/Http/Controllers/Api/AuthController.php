@@ -19,7 +19,12 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'name'     => 'required|string|max:255',
             'email'    => 'nullable|email|unique:users,email',
-            'phone'    => 'required|string|unique:users,phone',
+            'phone' => [
+                        'required',
+                        'string',
+                        'regex:/^0[0-9]{9}$/',
+                        'unique:users,phone'
+                        ],
             'password' => 'required|string|min:6|confirmed',
             'role'     => 'required|in:buyer,seller',
         ]);
@@ -114,7 +119,11 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'phone'    => 'required|string',
+            'phone' => [
+                        'required',
+                        'string',
+                        'regex:/^0[0-9]{9}$/'
+                        ],
             'password' => 'required|string',
         ]);
 
