@@ -210,14 +210,109 @@ if (signupForm) {
 }
 
   const resetForm = document.getElementById('reset-form');
-  if (resetForm) {
-    resetForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      // TODO: replace with a real password-reset API call
-      showToast('Reset link sent — check your inbox');
-      console.log('Reset payload:', { email: document.getElementById('reset-email').value });
+if (resetForm) {
+  let resetPhone = '';
+
+  // Step 1: Send OTP
+  resetForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const phone = document.getElementById('reset-phone').value.trim();
+
+    if (typeof isValidPhone === 'function' && !isValidPhone(phone)) {
+      showToast('Phone must start with 0 and be exactly 10 digits');
+      return;
+    }
+
+    try {
+      const res = await fetch(`${API_BASE}/auth/forgot-password`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({ phone })
+      });
+
+      const data = await res.json();
+
+      if (data.status === true) {
+        resetPhone = phone;
+        showToast(data.message || 'OTP sent');
+
+        // For testing: show OTP in toast/console
+        if (data.otp) {
+          console.log('Reset OTP:', data.otp);
+          showToast(`OTP: ${data.otp} (testing only)`);
+        }
+
+        // Show step 2
+        document.getElementById('step-phone').style.display = 'none';
+        document.getElementById('step-reset').style.display = 'block';
+      } else {
+        showToast(data.message || 'Failed to send OTP');
+      }
+    } catch (error) {
+      console.error(error);
+      showToast('Network error');
+    }
+  });
+
+  // Step 2: Reset password
+  const resetBtn = document.getElementById('reset-password-btn');
+  if (resetBtn) {
+    resetBtn.addEventListener('click', async () => {
+      const otp = document.getElementById('reset-otp').value.trim();
+      const password = document.getElementById('reset-password').value;
+      const confirm = document.getElementById('reset-password-confirm').value;
+
+      if (!otp || !password || !confirm) {
+        showToast('Please fill all fields');
+        return;
+      }
+
+      if (password !== confirm) {
+        showToast("Passwords don't match");
+        return;
+      }
+
+      if (password.length < 6) {
+        showToast('Password must be at least 6 characters');
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API_BASE}/auth/reset-password`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            phone: resetPhone,
+            otp,
+            password,
+            password_confirmation: confirm
+          })
+        });
+
+        const data = await res.json();
+
+        if (data.status === true) {
+          showToast('Password reset successfully');
+          setTimeout(() => {
+            window.location.href = 'login.html';
+          }, 1200);
+        } else {
+          showToast(data.message || 'Failed to reset password');
+        }
+      } catch (error) {
+        console.error(error);
+        showToast('Network error');
+      }
     });
   }
+}
 
 // ===================== VERIFY OTP =====================
 const otpForm = document.getElementById('otp-form');

@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\SellerDashboardController;
 use App\Http\Controllers\Api\ChatController;
 
 use App\Http\Controllers\Api\AdminController;
+use App\Http\Controllers\Api\FavoriteController;
 
 // ====================== AUTH ROUTES ======================
 Route::prefix('auth')->group(function () {
@@ -123,4 +124,19 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/orders', [AdminController::class, 'orders']);
         Route::post('/orders/{id}/status', [AdminController::class, 'updateOrderStatus']);
     });
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/favorites', [FavoriteController::class, 'index']);
+    Route::post('/favorites', [FavoriteController::class, 'store']);
+    Route::delete('/favorites/{productId}', [FavoriteController::class, 'destroy']);
+});
+
+
+use App\Http\Controllers\Api\AddressController;
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/addresses', [AddressController::class, 'index']);
+    Route::post('/addresses', [AddressController::class, 'store']);
+    Route::delete('/addresses/{id}', [AddressController::class, 'destroy']);
 });

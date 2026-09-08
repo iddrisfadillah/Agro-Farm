@@ -265,6 +265,14 @@ function initSettingsNav() {
     btn.classList.add('active');
     document.querySelectorAll('.settings-panel').forEach(p => p.classList.remove('active'));
     document.getElementById(`panel-${btn.dataset.panel}`)?.classList.add('active');
+
+    // Load favorites when Favorites tab is clicked
+    if (btn.dataset.panel === 'favorites') {
+      loadFavorites();
+    }
+    if (btn.dataset.panel === 'addresses') {
+      loadAddresses();
+    }
   });
 
   const saveBtn = document.getElementById('save-profile-btn');
@@ -1054,6 +1062,11 @@ function initAccountPage() {
   // Load orders
   loadBuyerOrders();
 
+  // When favorites panel is opened, or load once
+  loadFavorites();
+
+  loadAddresses();
+
   // Load profile
   const user = JSON.parse(localStorage.getItem('user') || 'null');
   if (user) {
@@ -1081,4 +1094,259 @@ function initAccountPage() {
       localStorage.removeItem('user');
     });
   });
+}
+
+async function loadFavorites() {
+  const token = localStorage.getItem('token');
+  if (!token) return;
+
+  try {
+    const res = await fetch(`${API_BASE}/favorites`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json'
+      }
+    });
+
+    const data = await res.json();
+
+    if (!data.status) {
+      showToast(data.message || 'Failed to load favorites');
+      return;
+    }
+
+    renderFavorites(data.favorites || []);
+  } catch (error) {
+    console.error(error);
+    showToast('Network error');
+  }
+}
+
+function renderFavorites(favorites) {
+  const grid = document.querySelector('#panel-favorites .product-grid');
+  if (!grid) return;
+
+  if (favorites.length === 0) {
+    grid.innerHTML = `
+      <div style="grid-column:1/-1; text-align:center; padding:40px; color:#777;">
+        No favorites yet. Browse the <a href="shop.html">shop</a> and tap the heart icon.
+      </div>
+    `;
+    return;
+  }
+
+  grid.innerHTML = favorites.map(fav => {
+    const product = fav.product;
+    if (!product) return '';
+
+    const image = product.images?.[0]?.image_path
+      ? `http://127.0.0.1:8000/storage/${product.images[0].image_path}`
+      : 'https://via.placeholder.com/400x300';
+
+    const farm = product.seller?.name || 'Local Farm';
+    const price = Number(product.price || 0).toFixed(2);
+
+    return `
+      <a href="product.html?id=${product.id}" class="product-card">
+        <div class="thumb" style="background-image:url('${image}')">
+          <div class="badges">
+            ${product.certification ? `<span class="badge organic">${product.certification}</span>` : ''}
+          </div>
+          <button class="fav-btn active" aria-label="Remove from favorites"
+            onclick="event.preventDefault(); event.stopPropagation(); removeFavorite(${product.id})">
+            <i class="fa-solid fa-heart"></i>
+          </button>
+        </div>
+        <div class="body">
+          <h3>${product.name}</h3>
+          <span class="farm">${farm}</span>
+          <div class="price-row">
+            <span class="price">$${price} <span class="unit">/ ${product.unit || 'unit'}</span></span>
+          </div>
+        </div>
+      </a>
+    `;
+  }).join('');
+}
+
+async function removeFavorite(productId) {
+  const token = localStorage.getItem('token');
+
+  try {
+    const res = await fetch(`${API_BASE}/favorites/${productId}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json'
+      }
+    });
+
+    const data = await res.json();
+
+    if (data.status) {
+      showToast('Removed from favorites');
+      loadFavorites();
+    } else {
+      showToast(data.message || 'Failed to remove');
+    }
+  } catch (error) {
+    showToast('Network error');
+  }
+}
+
+async function addFavorite(productId) {
+  const token = localStorage.getItem('token');
+
+  if (!token) {
+    showToast('Please log in to save favorites');
+    return;
+  }
+
+  try {
+    const res = await fetch(`${API_BASE}/favorites`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({ product_id: productId })
+    });
+
+    const data = await res.json();
+
+    if (data.status) {
+      showToast('Added to favorites');
+    } else {
+      showToast(data.message || 'Failed to add');
+    }
+  } catch (error) {
+    showToast('Network error');
+  }
+}
+/* ---------- Addresses ---------- */
+async function loadAddresses() {
+  const token = localStorage.getItem('token');
+  if (!token) return;
+
+  try {
+    const res = await fetch(`${API_BASE}/addresses`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json'
+      }
+    });
+
+    const data = await res.json();
+
+    if (!data.status) {
+      showToast(data.message || 'Failed to load addresses');
+      return;
+    }
+
+    renderAddresses(data.addresses || []);
+  } catch (error) {
+    console.error(error);
+    showToast('Network error');
+  }
+}
+
+function renderAddresses(addresses) {
+  const list = document.querySelector('#panel-addresses .address-list');
+  if (!list) return;
+
+  if (addresses.length === 0) {
+    list.innerHTML = `
+      <div style="text-align:center; padding:30px; color:#777;">
+        No saved addresses yet.
+      </div>
+    `;
+    return;
+  }
+
+  list.innerHTML = addresses.map(addr => {
+    const full = [addr.address, addr.city, addr.region].filter(Boolean).join(', ');
+
+    return `
+      <div class="address-card">
+        <div class="address-card-head">
+          <strong>${addr.label || 'Address'}</strong>
+          ${addr.is_default ? '<span class="badge in-stock">Default</span>' : ''}
+        </div>
+        <p>${full}</p>
+        <div class="address-actions">
+          <button class="btn btn-outline btn-sm" onclick="deleteAddress(${addr.id})">Remove</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+async function deleteAddress(id) {
+  if (!confirm('Remove this address?')) return;
+
+  const token = localStorage.getItem('token');
+
+  try {
+    const res = await fetch(`${API_BASE}/addresses/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json'
+      }
+    });
+
+    const data = await res.json();
+
+    if (data.status) {
+      showToast('Address removed');
+      loadAddresses();
+    } else {
+      showToast(data.message || 'Failed to remove');
+    }
+  } catch (error) {
+    showToast('Network error');
+  }
+}
+
+async function addAddress() {
+  const label = prompt('Label (e.g. Home, Office):', 'Home');
+  if (!label) return;
+
+  const address = prompt('Street address:');
+  if (!address) return;
+
+  const city = prompt('City (optional):', '') || null;
+  const region = prompt('Region (optional):', '') || null;
+
+  const token = localStorage.getItem('token');
+
+  try {
+    const res = await fetch(`${API_BASE}/addresses`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        label,
+        address,
+        city,
+        region,
+        is_default: false
+      })
+    });
+
+    const data = await res.json();
+
+    if (data.status) {
+      showToast('Address saved');
+      loadAddresses();
+    } else {
+      showToast(data.message || 'Failed to save');
+    }
+  } catch (error) {
+    showToast('Network error');
+  }
 }

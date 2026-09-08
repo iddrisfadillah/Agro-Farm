@@ -26,18 +26,50 @@
   <div class="reset-card">
     <div class="reset-icon"><i class="fa-solid fa-key"></i></div>
     <h2>Reset Password</h2>
-    <p class="auth-sub center">Enter the email address associated with your account and we'll send you a link to reset your password.</p>
+    <p class="auth-sub center">Enter your phone number. We’ll send an OTP so you can reset your password.</p>
 
     <form id="reset-form">
-      <div class="field">
-        <label for="reset-email">Email Address</label>
-        <div class="input-icon">
-          <i class="fa-solid fa-envelope"></i>
-          <input type="email" id="reset-email" placeholder="farmer@agromarket.com" required>
-        </div>
+    <!-- Step 1: Phone -->
+    <div id="step-phone">
+    <div class="field">
+      <label for="reset-phone">Phone Number</label>
+      <div class="input-icon">
+        <i class="fa-solid fa-phone"></i>
+        <input type="tel" id="reset-phone" placeholder="e.g. 0244123456" maxlength="10" required>
+      </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block" id="send-otp-btn">
+      Send OTP <i class="fa-solid fa-arrow-right"></i>
+      </button>
       </div>
 
-      <button type="submit" class="btn btn-primary btn-block">Send Reset Link <i class="fa-solid fa-arrow-right"></i></button>
+     <!-- Step 2: OTP + New Password (hidden at first) -->
+      <div id="step-reset" style="display:none;">
+      <div class="field">
+      <label for="reset-otp">OTP Code</label>
+      <div class="input-icon">
+        <i class="fa-solid fa-shield"></i>
+        <input type="text" id="reset-otp" placeholder="6-digit OTP" maxlength="6" required>
+        </div>
+      </div>
+      <div class="field">
+      <label for="reset-password">New Password</label>
+      <div class="input-icon">
+        <i class="fa-solid fa-lock"></i>
+        <input type="password" id="reset-password" placeholder="Min 6 characters" required>
+      </div>
+      </div>
+      <div class="field">
+      <label for="reset-password-confirm">Confirm Password</label>
+      <div class="input-icon">
+        <i class="fa-solid fa-lock"></i>
+        <input type="password" id="reset-password-confirm" placeholder="Confirm new password" required>
+      </div>
+      </div>
+      <button type="button" class="btn btn-primary btn-block" id="reset-password-btn">
+      Reset Password <i class="fa-solid fa-check"></i>
+    </button>
+    </div>
     </form>
 
     <a href="login.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Login</a>
