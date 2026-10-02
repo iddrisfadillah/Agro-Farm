@@ -694,11 +694,15 @@ function initCheckoutForm() {
       return;
     }
 
-    const fullName = document.getElementById('full-name')?.value;
-    const phone = document.getElementById('phone')?.value;
-    const address = document.getElementById('address')?.value;
-    const city = document.getElementById('city')?.value;
-    const region = document.getElementById('region')?.value;
+    // Selected payment method from your radio buttons (momo / card / cash)
+    const paymentMethod =
+      document.querySelector('input[name="payment"]:checked')?.value || 'momo';
+
+    const fullName = document.getElementById('full-name')?.value?.trim() || '';
+    const phone = document.getElementById('phone')?.value?.trim() || '';
+    const address = document.getElementById('address')?.value?.trim() || '';
+    const city = document.getElementById('city')?.value?.trim() || '';
+    const region = document.getElementById('region')?.value?.trim() || '';
 
     if (!fullName || !phone || !address || !city) {
       showToast('Please fill in all required delivery details');
@@ -710,7 +714,8 @@ function initCheckoutForm() {
     try {
       showToast('Placing your order...');
 
-      const res = await fetch(`${API_BASE}/orders`, {
+      // 1. Create order
+      const orderRes = await fetch(`${API_BASE}/orders`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -722,44 +727,122 @@ function initCheckoutForm() {
           delivery_address: deliveryAddress,
           delivery_latitude: null,
           delivery_longitude: null,
-          notes: `Phone: ${phone} | Name: ${fullName}`
+          notes: `Phone: ${phone} | Name: ${fullName} | Pay: ${paymentMethod}`
         })
       });
 
-      const data = await res.json();
+      const orderData = await orderRes.json();
 
-      if (data.status === true) {
-        // Show confirmation view
-        document.getElementById('checkout-view').style.display = 'none';
-        document.getElementById('confirmation-view').style.display = 'block';
+      if (!orderData.status) {
+        showToast(orderData.message || 'Failed to place order');
+        return;
+      }
 
-        // Update order number
-        const orderNumberEl = document.getElementById('order-number');
-        if (orderNumberEl && data.order?.order_number) {
-          orderNumberEl.textContent = `#${data.order.order_number}`;
+      const order = orderData.order;
+
+      // 2. Cash on Delivery → skip Paystack
+      if (paymentMethod === 'cash' || paymentMethod === 'cod') {
+        showOrderConfirmation(order);
+        return;
+      }
+
+      // 3. MoMo or Card → Paystack
+      const payRes = await fetch(`${API_BASE}/payments/initialize`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          order_id: order.id,
+          payment_method: paymentMethod
+        })
+      });
+
+      const payData = await payRes.json();
+
+      if (!payData.status) {
+        showToast(payData.message || 'Failed to start payment');
+        return;
+      }
+
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+
+      const handler = PaystackPop.setup({
+        key: payData.public_key,
+        email: user.email || `${user.phone || 'buyer'}@agromarket.test`,
+        amount: Math.round(Number(order.total) * 100),
+        currency: 'GHS',
+        ref: payData.reference,
+        metadata: {
+          order_id: order.id,
+          order_number: order.order_number
+        },
+        callback: function (response) {
+          verifyPayment(response.reference, order);
+        },
+        onClose: function () {
+          showToast('Payment window closed');
         }
-        // Update Total Paid
-        const metaDivs = document.querySelectorAll('.confirmation-meta > div');
-       if (metaDivs.length >= 3) {
-        const totalStrong = metaDivs[2].querySelector('strong');
-       if (totalStrong && data.order.total) {
-       totalStrong.textContent = `$${Number(data.order.total).toFixed(2)}`;
-       }
-       }
+      });
 
-      //   showToast('Order placed successfully!');
-      // }
-       showToast('Order placed successfully!');
-       window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-      else {
-        showToast(data.message || 'Failed to place order');
-      }
+      handler.openIframe();
+
     } catch (error) {
       console.error(error);
       showToast('Network error. Please try again.');
     }
   });
+}
+
+async function verifyPayment(reference, order) {
+  const token = localStorage.getItem('token');
+
+  try {
+    const res = await fetch(`${API_BASE}/payments/verify`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({ reference })
+    });
+
+    const data = await res.json();
+
+    if (data.status) {
+      showToast('Payment successful');
+      showOrderConfirmation(data.order || order);
+    } else {
+      showToast(data.message || 'Payment verification failed');
+    }
+  } catch (error) {
+    console.error(error);
+    showToast('Could not verify payment');
+  }
+}
+
+function showOrderConfirmation(order) {
+  document.getElementById('checkout-view').style.display = 'none';
+  document.getElementById('confirmation-view').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  const orderNumberEl = document.getElementById('order-number');
+  if (orderNumberEl && order?.order_number) {
+    orderNumberEl.textContent = `#${order.order_number}`;
+  }
+
+  const metaDivs = document.querySelectorAll('.confirmation-meta > div');
+  if (metaDivs.length >= 3) {
+    const totalStrong = metaDivs[2].querySelector('strong');
+    if (totalStrong && order?.total) {
+      totalStrong.textContent = `$${Number(order.total).toFixed(2)}`;
+    }
+  }
+
+  showToast('Order placed successfully!');
 }
 
 

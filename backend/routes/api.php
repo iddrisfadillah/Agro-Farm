@@ -29,6 +29,7 @@ Route::prefix('auth')->group(function () {
         Route::get('/profile', [AuthController::class, 'profile']);
         Route::post('/update-profile', [AuthController::class, 'updateProfile']);
         Route::post('/upload-national-id', [AuthController::class, 'uploadNationalId']);
+        Route::post('/change-password', [AuthController::class, 'changePassword']); // ← add this
     });
 });
 
@@ -139,4 +140,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/addresses', [AddressController::class, 'index']);
     Route::post('/addresses', [AddressController::class, 'store']);
     Route::delete('/addresses/{id}', [AddressController::class, 'destroy']);
+});
+
+
+use App\Http\Controllers\Api\PaymentController;
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/payments/initialize', [PaymentController::class, 'initialize']);
+    Route::post('/payments/verify', [PaymentController::class, 'verify']);
 });

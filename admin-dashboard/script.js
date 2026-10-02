@@ -322,7 +322,7 @@ function initSettingsPage() {
 
   const changePasswordBtn = document.getElementById('change-password-btn');
   if (changePasswordBtn) {
-    changePasswordBtn.addEventListener('click', () => {
+    changePasswordBtn.addEventListener('click', async () => {
       const current = document.getElementById('current-password').value;
       const next = document.getElementById('new-password').value;
       const confirm = document.getElementById('confirm-new-password').value;
@@ -336,10 +336,47 @@ function initSettingsPage() {
         return;
       }
       // TODO: replace with a real password-change API call
+      if (next.length < 6) {
+      showToast('Password must be at least 6 characters');
+      return;
+    }
+
+    const token = localStorage.getItem('token');
+    if (!token) {
+      showToast('Please log in again');
+      return;
+    }
+
+    try {
+      const res = await fetch(`${API_BASE}/auth/change-password`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          current_password: current,
+          password: next,
+          password_confirmation: confirm
+        })
+      });
+
+      const data = await res.json();
+
+
+      if (data.status) {
       showToast('Password updated');
       document.getElementById('current-password').value = '';
       document.getElementById('new-password').value = '';
       document.getElementById('confirm-new-password').value = '';
+      } else {
+        showToast(data.message || 'Failed to update password');
+      }
+    } catch (error) {
+      console.error(error);
+      showToast('Network error');
+    }
     });
   }
 
